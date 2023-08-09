@@ -29,7 +29,7 @@ export default {
   },
   colors: {
     white: '#fff',
-    gray_100: '#c0c5ce',
+    gray_100: '#ccc',
     gray_200: '#a7adba',
     gray_300: '#65737e',
     gray_400: '#4f5b66',

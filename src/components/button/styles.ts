@@ -20,7 +20,7 @@ export const ButtonWrapper = styled.button<ButtonStyleProps>`
       border-width: 2px;
       box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;
       box-sizing: border-box;
-      color: ${theme.colors.gray_300};
+      color: ${theme.colors.gray_400};
       cursor: pointer;
       display: inline-block;
       font-family: Neucha, sans-serif;
