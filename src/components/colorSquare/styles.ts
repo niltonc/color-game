@@ -16,7 +16,7 @@ export const SquareContainer = styled.div<SquareStyleProps>`
 export const ProgressBar = styled.div<SquareStyleProps>`
   width: ${(props) => props.progress}%;
   height: 5px;
-  background-color: ${theme.colors.gray_200};
+  background-color: ${theme.colors.gray_100};
   position: absolute;
   top: 0;
   left: 0;

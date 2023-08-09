@@ -39,7 +39,8 @@ export default {
     light_cian: '#01cdfe',
     light_green: '#05ffa1',
     light_purple: '#b967ff',
-    light_yellow: '#fffb96'
+    light_yellow: '#fffb96',
+    hover: '#f0f0f0'
   },
   spacings: {
     xxxsmall: '0.8rem',
