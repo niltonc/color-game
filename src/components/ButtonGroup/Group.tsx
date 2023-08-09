@@ -1,20 +1,11 @@
-import { ButtonWrapper } from './styles';
+import React from 'react';
+import { ButtonGroupWrapper } from './styles';
 
-interface ButtonGruopProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  selected?: boolean;
+interface ButtonGruopProps {
   children?: React.ReactNode;
 }
-const Button: React.FC<ButtonGruopProps> = ({
-  selected,
-  children,
-  ...rest
-}) => {
-  return (
-    <ButtonWrapper selected={selected} {...rest}>
-      {children}
-    </ButtonWrapper>
-  );
+const ButtonGroup: React.FC<ButtonGruopProps> = ({ children }) => {
+  return <ButtonGroupWrapper>{children}</ButtonGroupWrapper>;
 };
 
-export default Button;
+export default ButtonGroup;

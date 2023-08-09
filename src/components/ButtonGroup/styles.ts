@@ -1,15 +1,16 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import theme from '@/styles/theme';
 
 interface SelectHEXStyleProps {
   selected?: boolean;
   first?: boolean;
+  blr?: boolean;
 }
 export const ButtonGroupWrapper = styled.div`
   display: flex;
   overflow: hidden;
   border-radius: 8px;
-  border: 2px solid ${theme.colors.gray_200};
+  border: 2px solid ${theme.colors.gray_100};
 `;
 
 export const ButtonWrapper = styled.button<SelectHEXStyleProps>`
@@ -19,7 +20,7 @@ export const ButtonWrapper = styled.button<SelectHEXStyleProps>`
   font-size: 16px;
   cursor: pointer;
   color: ${(props) =>
-    props.selected ? theme.colors.white : theme.colors.gray_300};
+    props.selected ? theme.colors.white : theme.colors.gray_500};
   background-color: ${(props) =>
     props.selected ? theme.colors.light_purple : theme.colors.white};
   &:hover {
@@ -28,4 +29,10 @@ export const ButtonWrapper = styled.button<SelectHEXStyleProps>`
     color: ${(props) =>
       props.selected ? theme.colors.light_purple : theme.colors.gray_300};
   }
+  ${(props) =>
+    props.blr &&
+    css`
+      border-left: 2px solid ${theme.colors.gray_100};
+      border-right: 2px solid ${theme.colors.gray_100};
+    `}
 `;
