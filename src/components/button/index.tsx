@@ -1,7 +1,7 @@
 import { ButtonWrapper } from './styles';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: string;
+  variant?: 'primary' | 'text';
   children?: React.ReactNode;
 }
 
