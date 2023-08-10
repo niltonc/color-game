@@ -1,10 +1,6 @@
 import styled, { css } from 'styled-components';
 import theme from '@/styles/theme';
 
-interface ButtonStyleProps {
-  variant?: string;
-}
-
 export const ButtonWrapper = styled.button<ButtonStyleProps>`
   ${(props) =>
     props.variant === 'primary' &&

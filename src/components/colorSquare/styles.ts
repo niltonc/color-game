@@ -1,11 +1,6 @@
 import styled from 'styled-components';
 import theme from '@/styles/theme';
 
-interface SquareStyleProps {
-  progress?: number;
-  color?: string;
-}
-
 export const SquareContainer = styled.div<SquareStyleProps>`
   width: 350px;
   height: 350px;

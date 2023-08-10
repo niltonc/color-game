@@ -1,9 +1,6 @@
 import styled, { css } from 'styled-components';
 import theme from '@/styles/theme';
 
-interface ColorResultStyleProps {
-  fz?: boolean;
-}
 export const ColorResultContainer = styled.div`
   display: flex;
   align-items: center;

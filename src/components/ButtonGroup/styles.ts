@@ -1,11 +1,6 @@
 import styled, { css } from 'styled-components';
 import theme from '@/styles/theme';
 
-interface SelectHEXStyleProps {
-  selected?: boolean;
-  first?: boolean;
-  blr?: boolean;
-}
 export const ButtonGroupWrapper = styled.div`
   display: flex;
   overflow: hidden;
@@ -13,7 +8,7 @@ export const ButtonGroupWrapper = styled.div`
   border: 2px solid ${theme.colors.gray_100};
 `;
 
-export const ButtonWrapper = styled.button<SelectHEXStyleProps>`
+export const ButtonWrapper = styled.button<ButtonGruopProps>`
   flex: 1;
   border: none;
   padding: 10px;

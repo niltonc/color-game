@@ -1,10 +1,7 @@
 import React from 'react';
 import { ButtonGroupWrapper } from './styles';
 
-interface ButtonGruopProps {
-  children?: React.ReactNode;
-}
-const ButtonGroup: React.FC<ButtonGruopProps> = ({ children }) => {
+const ButtonGroup: React.FC<ChildrenProp> = ({ children }) => {
   return <ButtonGroupWrapper>{children}</ButtonGroupWrapper>;
 };
 

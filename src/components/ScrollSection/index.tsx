@@ -1,10 +1,6 @@
 import { SectionWrapper, ScrollableContent, Content } from './styles';
 
-interface ScrollSectionProps {
-  children?: React.ReactNode;
-}
-
-const ScrollSection = ({ children }: ScrollSectionProps) => {
+const ScrollSection = ({ children }: ChildrenProp) => {
   return (
     <SectionWrapper>
       <ScrollableContent>

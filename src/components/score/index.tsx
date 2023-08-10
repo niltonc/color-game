@@ -8,12 +8,6 @@ import {
   Text
 } from './styles';
 
-interface PointControler {
-  score?: number;
-  highScore?: number;
-  time?: number;
-  onReset?: () => void;
-}
 const PointControler: React.FC<PointControler> = ({
   score = 0,
   highScore = 0,

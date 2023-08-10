@@ -7,14 +7,6 @@ import {
   Rectangle
 } from './styles';
 
-type ColorResultProps = {
-  type?: 'success' | 'error';
-  color?: string;
-  timezone?: string;
-  errorLabel?: string;
-  successLabel?: string;
-};
-
 const ColorResult: React.FC<ColorResultProps> = ({
   type = 'success',
   color,
