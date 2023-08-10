@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import ColorSquare from '@/components/ColorSquare';
+import ColorSquare from '@/components/colorSquare';
 import { ButtonGroup } from '@/components/ButtonGroup';
 import PointControler from '@/components/score';
 import ColorfulTextComponent from '@/components/Title';
@@ -8,7 +8,7 @@ import Sidebar from '@/components/Sidebar';
 import ScrollSection from '@/components/ScrollSection';
 import { AppContainer, MainContent, ScoreContainer } from '@/styles/global';
 import ColorResult from '@/components/ColorResult';
-import Button from '@/components/Button';
+import Button from '@/components/button';
 
 type ColorHistoryEntry = {
   color: string;
