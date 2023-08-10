@@ -12,6 +12,18 @@ const ColorSquare: React.FC<ColorSquareProps> = ({ color, progress }) => {
     <div>
       <S.SquareContainer color={color}>
         <S.ProgressBar progress={progressWidth} />
+
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            background: 'red'
+          }}
+        >
+          <button>easy</button>
+          <button>midium</button>
+          <button>hard</button>
+        </div>
       </S.SquareContainer>
     </div>
   );
