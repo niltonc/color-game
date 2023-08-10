@@ -1,13 +1,14 @@
 'use client';
 
+import { useState } from 'react';
 import ColorSquare from '@/components/ColorSquare';
 import { ButtonGroup } from '@/components/ButtonGroup';
-import { useState } from 'react';
 import PointControler from '@/components/score';
 import ColorfulTextComponent from '@/components/Title';
 import Sidebar from '@/components/Sidebar';
-import { AppContainer, MainContent, ScoreContainer } from './style';
 import ScrollSection from '@/components/ScrollSection';
+import { AppContainer, MainContent, ScoreContainer } from '@/styles/global';
+import ColorResult from '@/components/ColorResult';
 
 export default function Home() {
   const [selectedButton, setSelectedButton] = useState(0);
@@ -19,17 +20,29 @@ export default function Home() {
   return (
     <AppContainer>
       <Sidebar>
-        <div style={{ fontWeight: 'bold', fontSize: 18 }}>
+        <div
+          style={{
+            fontWeight: 'bold',
+            fontSize: 18,
+            paddingInline: 20,
+            marginTop: 20
+          }}
+        >
           Current/Lastest Game
         </div>
 
         <ScoreContainer>
           <div style={{ fontSize: 15 }}>Guessed Color</div>
-          <div style={{ fontSize: 15 }}>Corrent Color</div>
+          <div style={{ fontSize: 15 }}>Correct Color</div>
           <div style={{ fontSize: 15 }}>Score</div>
         </ScoreContainer>
 
-        <ScrollSection></ScrollSection>
+        <ScrollSection>
+          <div style={{ paddingInline: 20 }}>
+            <ColorResult type="success" color="red" />
+            <ColorResult type="error" errorLabel="color" successLabel="color" />
+          </div>
+        </ScrollSection>
       </Sidebar>
 
       <MainContent>
