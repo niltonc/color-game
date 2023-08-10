@@ -1,6 +1,5 @@
 'use client';
-
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ColorSquare from '@/components/ColorSquare';
 import { ButtonGroup } from '@/components/ButtonGroup';
 import PointControler from '@/components/score';
@@ -9,12 +8,79 @@ import Sidebar from '@/components/Sidebar';
 import ScrollSection from '@/components/ScrollSection';
 import { AppContainer, MainContent, ScoreContainer } from '@/styles/global';
 import ColorResult from '@/components/ColorResult';
+import Button from '@/components/Button';
+
+type ColorHistoryEntry = {
+  color: string;
+  success: boolean;
+};
 
 export default function Home() {
   const [selectedButton, setSelectedButton] = useState(0);
+  const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
+  const [time, setTime] = useState(10);
+  const [currentColor, setCurrentColor] = useState('#000000');
+  const [gameInProgress, setGameInProgress] = useState(false);
+  const [colorHistory, setColorHistory] = useState<ColorHistoryEntry[]>([]);
 
-  const handleButtonClick = (buttonIndex: React.SetStateAction<number>) => {
-    setSelectedButton(buttonIndex);
+  const handleButtonClick = (buttonIndex: number) => {
+    if (selectedButton === buttonIndex && gameInProgress) {
+      setScore(score + 5);
+      setTime(time + 1);
+    } else {
+      setScore(score - 1);
+      setTime(time - 2);
+    }
+
+    const newColor = generateRandomColor();
+    setColorHistory([
+      ...colorHistory,
+      { color: currentColor, success: selectedButton === buttonIndex }
+    ]);
+    setCurrentColor(newColor);
+    setSelectedButton(0);
+  };
+
+  const handleStartGame = () => {
+    setScore(0);
+    setTime(10);
+    setCurrentColor(generateRandomColor());
+    setColorHistory([]);
+    setGameInProgress(true);
+  };
+
+  useEffect(() => {
+    if (score > highScore) {
+      setHighScore(score);
+    }
+
+    if (gameInProgress && time > 0) {
+      const timer = setTimeout(() => {
+        setTime(time - 1);
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    } else {
+      setGameInProgress(false);
+    }
+  }, [score, highScore, time, gameInProgress]);
+
+  const generateRandomColor = () => {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  };
+
+  const handleReset = () => {
+    setScore(0);
+    setTime(10);
+    setCurrentColor(generateRandomColor());
+    setColorHistory([]);
+    setGameInProgress(false);
   };
 
   return (
@@ -57,13 +123,14 @@ export default function Home() {
           </div>
           <div style={{ paddingBlock: 15 }}>
             <PointControler
-              score="20"
-              highScore="60"
-              time="10"
-              onReset={() => console.log('reset')}
+              score={score}
+              highScore={highScore}
+              time={time}
+              onReset={handleReset}
             />
           </div>
-          <ColorSquare color="#01cdfe" progress={50} />
+
+          <ColorSquare color={currentColor} progress={50} />
 
           <div style={{ paddingBlock: 15 }}>
             <ButtonGroup.Root>
@@ -90,6 +157,9 @@ export default function Home() {
           </div>
         </div>
       </MainContent>
+      <Button variant="text" onClick={() => handleReset()}>
+        Reset All
+      </Button>
     </AppContainer>
   );
 }
