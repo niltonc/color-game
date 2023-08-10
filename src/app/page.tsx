@@ -1,25 +1,13 @@
 'use client';
 
-import ColorSquare from '@/components/colorSquare';
+import ColorSquare from '@/components/ColorSquare';
 import { ButtonGroup } from '@/components/ButtonGroup';
 import { useState } from 'react';
 import PointControler from '@/components/score';
 import ColorfulTextComponent from '@/components/Title';
 import Sidebar from '@/components/Sidebar';
-import styled from 'styled-components';
-
-const AppContainer = styled.div`
-  display: flex;
-  height: 100vh;
-`;
-
-const MainContent = styled.div`
-  flex: 1;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-`;
+import { AppContainer, MainContent, ScoreContainer } from './style';
+import ScrollSection from '@/components/ScrollSection';
 
 export default function Home() {
   const [selectedButton, setSelectedButton] = useState(0);
@@ -31,13 +19,30 @@ export default function Home() {
   return (
     <AppContainer>
       <Sidebar>
-        <h2>Sidebar</h2>
-        <p>Conteúdo da barra lateral...</p>
+        <div style={{ fontWeight: 'bold', fontSize: 18 }}>
+          Current/Lastest Game
+        </div>
+
+        <ScoreContainer>
+          <div style={{ fontSize: 15 }}>Guessed Color</div>
+          <div style={{ fontSize: 15 }}>Corrent Color</div>
+          <div style={{ fontSize: 15 }}>Score</div>
+        </ScoreContainer>
+
+        <ScrollSection></ScrollSection>
       </Sidebar>
+
       <MainContent>
         <div>
-          <ColorfulTextComponent />
-          <div style={{ paddingBlock: 10 }}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center'
+            }}
+          >
+            <ColorfulTextComponent />
+          </div>
+          <div style={{ paddingBlock: 15 }}>
             <PointControler
               score="20"
               highScore="60"
@@ -45,10 +50,9 @@ export default function Home() {
               onReset={() => console.log('reset')}
             />
           </div>
-
           <ColorSquare color="#01cdfe" progress={50} />
 
-          <div style={{ paddingBlock: 10 }}>
+          <div style={{ paddingBlock: 15 }}>
             <ButtonGroup.Root>
               <ButtonGroup.Item
                 selected={selectedButton === 1}
