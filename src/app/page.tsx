@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ColorSquare from '@/components/ColorSquare';
 import { ButtonGroup } from '@/components/ButtonGroup';
 import PointControler from '@/components/score';
