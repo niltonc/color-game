@@ -9,25 +9,25 @@ import {
 } from './styles';
 
 interface PointControler {
-  score?: string;
-  highScore?: string;
-  time?: string;
+  score?: number;
+  highScore?: number;
+  time?: number;
   onReset?: () => void;
 }
 const PointControler: React.FC<PointControler> = ({
-  score,
-  highScore,
-  time,
+  score = 0,
+  highScore = 0,
+  time = 0,
   onReset
 }) => {
   return (
     <ScoreWrapper>
       <ScoreColumn style={{ gap: 5 }}>
         <Title>
-          REAMING <br />
+          REMANING <br />
           TIME (s)
         </Title>
-        <Text>{time ?? '0'}</Text>
+        <Text>{time}s</Text>
       </ScoreColumn>
       <div>
         <Button onClick={onReset}>RESTART</Button>
@@ -38,11 +38,11 @@ const PointControler: React.FC<PointControler> = ({
             HIGH <br />
             SCORE
           </Title>
-          <Text style={{ marginRight: 20 }}>{highScore ?? '0'}</Text>
+          <Text style={{ marginRight: 20 }}>{highScore}</Text>
         </ScoreItem>
         <ScoreItem style={{ borderTop: '2px solid #ccc' }}>
           <Title style={{ marginLeft: 20 }}>SCORE</Title>
-          <Text style={{ marginRight: 20 }}>{score ?? '0'}</Text>
+          <Text style={{ marginRight: 20 }}>{score}</Text>
         </ScoreItem>
       </ScoreColumn>
     </ScoreWrapper>
