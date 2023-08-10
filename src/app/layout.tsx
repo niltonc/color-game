@@ -1,11 +1,12 @@
-import { Inter } from 'next/font/google';
+'use client';
+import styled, { ThemeProvider } from 'styled-components';
+import StyledComponentsRegistry from './registry';
+import theme from '@/styles/theme';
+import GlobalStyles from '@/styles/global';
 
-const inter = Inter({ subsets: ['latin'] });
-
-export const metadata = {
-  title: 'COLOR GAME',
-  description: 'GUESS THE COLOR'
-};
+const Body = styled.body`
+  margin: 0;
+`;
 
 export default function RootLayout({
   children
@@ -13,8 +14,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.className}>
-      <body>{children}</body>
+    <html lang="en">
+      <StyledComponentsRegistry>
+        <ThemeProvider theme={theme}>
+          <Body>{children}</Body>
+          <GlobalStyles />
+        </ThemeProvider>
+      </StyledComponentsRegistry>
     </html>
   );
 }
