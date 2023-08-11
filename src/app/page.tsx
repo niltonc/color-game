@@ -16,6 +16,7 @@ import { usePersistedHighScore } from '@/store/usePersistedHighScore';
 import { generateRandomHexdecimalColor } from '@/utils/generateRandomColor';
 
 import { AppContainer, MainContent } from '@/styles/global';
+import { difficultMode, progress, startTimer } from '@/utils/constants';
 
 type colorHistory = {
   successColor: string;
@@ -24,38 +25,22 @@ type colorHistory = {
 };
 
 export default function Home() {
-  const { isStart, setIsStart } = useGlobalStore((state) => state);
-  const { highScore, setHighScore } = usePersistedHighScore();
+  const { highScore, isStart, setIsStart } = useGlobalStore((state) => state);
+  const { setHighScore, clearHighScore } = usePersistedHighScore();
 
-  const [difficultLevel, setDifficultLevel] = useState<string>('easy');
+  const [time, setTime] = useState(30);
+  const [score, setScore] = useState(0);
+  const [colors, setColors] = useState<string[]>([]);
+  const [history, setHistory] = useState<colorHistory[]>([]);
+  const [difficultyLevel, setDifficultyLevel] = useState<string>('easy');
   const [correctColor, setCorrectColor] = useState<string>(
     generateRandomHexdecimalColor()
   );
-  const [colors, setColors] = useState<string[]>([]);
-  const [score, setScore] = useState(0);
-  const [time, setTime] = useState(30);
 
-  const progress = (time / 30) * 100;
-
-  const [history, setHistory] = useState<colorHistory[]>([]);
-
-  const startTime = () => {
-    setTime(30);
-    setIsStart(true);
-  };
-
-  const setDifficultMode = (difficult: string) => {
-    setDifficultLevel(difficult);
-
-    const difficultModes: Record<string, number> = {
-      easy: 3,
-      medium: 4,
-      hard: 5
-    };
-
-    const numColors = difficultModes[difficult] || difficultModes['easy'];
-
-    return numColors;
+  const setDifficultyMode = (difficult: string) => {
+    setDifficultyLevel(difficult);
+    const numberButtons = difficultMode[difficult] || difficultMode['easy'];
+    return numberButtons;
   };
 
   const setColorOptions = (numColors: number) => {
@@ -78,9 +63,9 @@ export default function Home() {
   };
 
   const start = (difficult: string) => {
-    startTime();
+    startTimer(setTime, setIsStart);
 
-    const numcolors = setDifficultMode(difficult);
+    const numcolors = setDifficultyMode(difficult);
 
     setColorOptions(numcolors);
   };
@@ -107,7 +92,7 @@ export default function Home() {
 
       setScore(score + 5);
 
-      const numcolors = setDifficultMode(difficultLevel);
+      const numcolors = setDifficultyMode(difficultyLevel);
 
       setColorOptions(numcolors);
     } else {
@@ -165,6 +150,10 @@ export default function Home() {
     }
   }, [isStart, time]);
 
+  const handleResetAll = () => {
+    clearHighScore();
+  };
+
   return (
     <AppContainer>
       <Sidebar>
@@ -205,7 +194,7 @@ export default function Home() {
               onMediumMode={() => start('medium')}
               onHardMode={() => start('hard')}
               color={correctColor}
-              progress={progress}
+              progress={progress(time)}
             />
           </div>
           {isStart && (
@@ -225,9 +214,7 @@ export default function Home() {
           )}
         </div>
       </MainContent>
-      <Button variant="text" onClick={() => setHighScore(0)}>
-        Reset All
-      </Button>
+      <Button onClick={() => handleResetAll()}>Reset All</Button>
     </AppContainer>
   );
 }
