@@ -38,3 +38,6 @@ interface PointControler {
 interface ChildrenProp {
   children?: React.ReactNode;
 }
+interface ScoreBoardStyleProps {
+  binline?: boolean;
+}

@@ -4,16 +4,16 @@ import Image from 'next/image';
 import Skull from '@/assets/skull.svg';
 import Crown from '@/assets/crown-alt.svg';
 import Heart from '@/assets/heart-half-vertical.svg';
-import { useStartApp } from '@/store/useStartApp';
+import { useGlobalStore } from '@/store/useGlobalStore';
 
 const SquareGameColor: React.FC<ColorSquareProps> = ({
-  color,
-  progress,
+  color = '',
+  progress = 0,
   onEasyMode,
   onMediumMode,
   onHardMode
 }) => {
-  const { isStart } = useStartApp((state) => state);
+  const { isStart } = useGlobalStore((state) => state);
   const [progressWidth, setProgressWidth] = useState(0);
 
   useEffect(() => {

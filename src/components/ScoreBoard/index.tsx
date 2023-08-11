@@ -34,7 +34,7 @@ const ScoreBoard: React.FC<PointControler> = ({
           </Title>
           <Text style={{ marginRight: 20 }}>{highScore}</Text>
         </ScoreItem>
-        <ScoreItem style={{ borderTop: '2px solid #ccc' }}>
+        <ScoreItem binline>
           <Title style={{ marginLeft: 20 }}>SCORE</Title>
           <Text style={{ marginRight: 20 }}>{score}</Text>
         </ScoreItem>

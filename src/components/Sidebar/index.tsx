@@ -9,9 +9,7 @@ import {
 const Sidebar: React.FC<ChildrenProp> = ({ children }) => {
   return (
     <SidebarContainer>
-      <div style={{}}>
-        <TitleContainer>Current / Lastest Game</TitleContainer>
-      </div>
+      <TitleContainer>Current / Lastest Game</TitleContainer>
       <ScoreContainer>
         <Text>Guessed Color</Text>
         <Text>Correct Color</Text>

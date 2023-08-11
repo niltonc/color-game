@@ -1,18 +1,21 @@
 'use client';
+
 import React, { useEffect, useState } from 'react';
-import SquareGameColor from '@/components/SquareGameColor';
-import { ButtonGroup } from '@/components/ButtonGroup';
-import ScoreBoard from '@/components/ScoreBoard';
-import Title from '@/components/Title';
-import Sidebar from '@/components/Sidebar';
-import ScrollSection from '@/components/ScrollSection';
-import { AppContainer, MainContent } from '@/styles/global';
 
 import Button from '@/components/Button';
-import { useHighScore } from '@/store/usehighScore';
-import { generateRandomHexdecimalColor } from '@/utils/generateRandomColor';
-import { useStartApp } from '@/store/useStartApp';
+import Title from '@/components/Title';
+import Sidebar from '@/components/Sidebar';
+import ScoreBoard from '@/components/ScoreBoard';
 import ScoreHistory from '@/components/ScoreHistory';
+import { ButtonGroup } from '@/components/ButtonGroup';
+import ScrollSection from '@/components/ScrollSection';
+import SquareGameColor from '@/components/SquareGameColor';
+
+import { useGlobalStore } from '@/store/useGlobalStore';
+import { usePersistedHighScore } from '@/store/usePersistedHighScore';
+import { generateRandomHexdecimalColor } from '@/utils/generateRandomColor';
+
+import { AppContainer, MainContent } from '@/styles/global';
 
 type colorHistory = {
   successColor: string;
@@ -21,16 +24,16 @@ type colorHistory = {
 };
 
 export default function Home() {
+  const { isStart, setIsStart } = useGlobalStore((state) => state);
+  const { highScore, setHighScore } = usePersistedHighScore();
+
   const [difficultLevel, setDifficultLevel] = useState<string>('easy');
   const [correctColor, setCorrectColor] = useState<string>(
     generateRandomHexdecimalColor()
   );
   const [colors, setColors] = useState<string[]>([]);
   const [score, setScore] = useState(0);
-
   const [time, setTime] = useState(30);
-  const { isStart, setIsStart } = useStartApp((state) => state);
-  const { highScore, setHighScore } = useHighScore((state) => state);
 
   const progress = (time / 30) * 100;
 
@@ -222,7 +225,7 @@ export default function Home() {
           )}
         </div>
       </MainContent>
-      <Button variant="text" onClick={stop}>
+      <Button variant="text" onClick={() => setHighScore(0)}>
         Reset All
       </Button>
     </AppContainer>

@@ -1,5 +1,5 @@
 import theme from '@/styles/theme';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const ScoreWrapper = styled.div`
   width: 100%;
@@ -17,13 +17,18 @@ export const ScoreColumn = styled.div`
   flex-direction: column;
   justify-content: center;
 `;
-export const ScoreItem = styled.div`
+export const ScoreItem = styled.div<ScoreBoardStyleProps>`
   flex: 1;
   width: 100%;
   display: flex;
   padding-block: 2px;
   align-items: center;
   justify-content: space-between;
+  ${(props) =>
+    props.binline &&
+    css`
+      border-top: 2px solid ${theme.colors.border};
+    `}
 `;
 export const Button = styled.button`
   height: 100%;
