@@ -1,3 +1,4 @@
+import theme from '@/styles/theme';
 import styled, { keyframes } from 'styled-components';
 
 const colorAnimation = keyframes`
@@ -35,8 +36,8 @@ export const TitleWord3 = styled(TitleWord)`
 export const Title = styled.div`
   gap: 5px;
   display: flex;
-  font-size: 3rem;
-  font-weight: bold;
+  font-size: ${theme.font.sizes.large};
+  font-weight: ${theme.font.bold};
   text-transform: uppercase;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  text-shadow: ${theme.box.shadow};
 `;

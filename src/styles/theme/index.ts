@@ -7,7 +7,7 @@ export default {
     radius: '0.4rem'
   },
   box: {
-    shadow: '0 8px 8px rgba(0, 0, 0, 0.08)'
+    shadow: '2px 2px 4px rgba(0, 0, 0, 0.4)'
   },
   font: {
     light: 300,
@@ -20,7 +20,7 @@ export default {
       xsmall: '1.6rem',
       small: '2rem',
       medium: '2.4rem',
-      large: '3.2rem',
+      large: '3rem',
       xlarge: '4rem',
       xxlarge: '4.8rem',
       xxxlarge: '5.6rem',
@@ -30,10 +30,12 @@ export default {
   colors: {
     white: '#fff',
     gray_50: '#e5eaf2',
-    gray_100: '#ccc',
+    gray_100: '#D2D7DF',
     gray_200: '#a7adba',
+    border: '#9CA4AE',
     gray_300: '#65737e',
     gray_400: '#4f5b66',
+    primary: '#48525D',
     gray_500: '#343d46',
     black: '#0D0D0D',
     background: '#fffaf4',
