@@ -1,4 +1,4 @@
-# Color Game
+# GUESS THE COLOR
 
 ### Como o jogo funciona?
 
