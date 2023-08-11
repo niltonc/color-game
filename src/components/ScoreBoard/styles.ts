@@ -2,21 +2,21 @@ import theme from '@/styles/theme';
 import styled from 'styled-components';
 
 export const ScoreWrapper = styled.div`
-  display: flex;
   width: 100%;
-  border: 2px solid ${theme.colors.gray_100};
-  border-radius: 8px;
+  display: flex;
+  border-radius: ${theme.border.radius};
+  border: 2px solid ${theme.colors.border};
+  background-color: ${theme.colors.gray_50};
+  box-shadow: ${theme.box.shadow};
 `;
-
 export const ScoreColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 100%;
-  justify-content: center;
   height: 80px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
 `;
-
 export const ScoreItem = styled.div`
   flex: 1;
   width: 100%;
@@ -25,15 +25,13 @@ export const ScoreItem = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
-
 export const Button = styled.button`
   height: 100%;
   border: none;
-  font-size: 12px;
+  font-size: ${theme.font.sizes.xxxxsmall};
   background-color: ${theme.colors.gray_200};
-  color: ${theme.colors.gray_500};
-  border-left: 2px solid ${theme.colors.gray_100};
-  border-right: 2px solid ${theme.colors.gray_100};
+  color: ${theme.colors.primary};
+  border-inline: 2px solid ${theme.colors.border};
   font-weight: bold;
   cursor: pointer;
   &:hover {
@@ -45,13 +43,12 @@ export const Button = styled.button`
   }
 `;
 export const Title = styled.span`
-  font-size: 13px;
-  font-weight: 600;
-  font-style: normal;
+  font-size: ${theme.font.sizes.xxxxsmall};
+  font-weight: bold;
   color: ${theme.colors.gray_500};
 `;
 export const Text = styled.span`
-  font-size: 20px;
+  font-size: ${theme.font.sizes.xxsmall};
   font-weight: bold;
   font-style: normal;
   color: ${theme.colors.gray_500};

@@ -37,7 +37,6 @@ export const Title = styled.div`
   gap: 5px;
   display: flex;
   font-size: ${theme.font.sizes.large};
-  font-weight: ${theme.font.bold};
+  font-weight: bold;
   text-transform: uppercase;
-  text-shadow: ${theme.box.shadow};
 `;

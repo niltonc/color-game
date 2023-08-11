@@ -12,13 +12,6 @@ const GlobalStyles = createGlobalStyle`
     background-color: #fffaf4;
   }
 
-  :root {
-    --color-1: #186cb8;
-    --color-2: #2a9a9f;
-    --color-3: #f1b211;
-    --color-4: #e83611;
-    --color-5: #f9002f;
-  }
 `;
 
 export default GlobalStyles;
@@ -33,7 +26,7 @@ export const MainContent = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: center;
+  margin-top: 25px;
 `;
 
 export const ScoreContainer = styled.div`

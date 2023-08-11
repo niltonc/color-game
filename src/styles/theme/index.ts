@@ -10,9 +10,6 @@ export default {
     shadow: '2px 2px 4px rgba(0, 0, 0, 0.4)'
   },
   font: {
-    light: 300,
-    normal: 400,
-    bold: 600,
     sizes: {
       xxxxsmall: '0.8rem',
       xxxsmall: '1.2rem',
