@@ -2,15 +2,16 @@ import React from 'react';
 import {
   CheckCircular,
   ColorResultContainer,
+  Container,
   Duration,
   ErrorCircular,
   Rectangle
 } from './styles';
 
-const ColorResult: React.FC<ColorResultProps> = ({
+const ScoreHistory: React.FC<ColorResultProps> = ({
   type = 'success',
-  color,
-  timezone = '0s',
+  color = '',
+  time = 0,
   errorLabel = '',
   successLabel = ''
 }) => {
@@ -19,26 +20,30 @@ const ColorResult: React.FC<ColorResultProps> = ({
       {type === 'success' && (
         <ColorResultContainer>
           <Rectangle color={color}>{color}</Rectangle>
-          <CheckCircular />
-          <Duration>{timezone}</Duration>
+          <Container>
+            <CheckCircular />
+            <Duration>{time}s</Duration>
+          </Container>
         </ColorResultContainer>
       )}
       {type === 'error' && (
         <ColorResultContainer>
           <div style={{ display: 'flex', flex: 1, gap: 8 }}>
-            <Rectangle fz color="#90caf9">
+            <Rectangle variant="light" color="#90caf9">
               {errorLabel}
             </Rectangle>
-            <Rectangle fz color="#0288d1">
+            <Rectangle variant="dark" color="#0288d1">
               {successLabel}
             </Rectangle>
           </div>
-          <ErrorCircular />
-          <Duration>{timezone}</Duration>
+          <Container>
+            <ErrorCircular />
+            <Duration>{time}s</Duration>
+          </Container>
         </ColorResultContainer>
       )}
     </>
   );
 };
 
-export default ColorResult;
+export default ScoreHistory;

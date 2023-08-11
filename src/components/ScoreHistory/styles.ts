@@ -1,26 +1,51 @@
 import styled, { css } from 'styled-components';
 import theme from '@/styles/theme';
+import { readableColor } from 'polished';
 
 export const ColorResultContainer = styled.div`
+  flex: 1;
   display: flex;
   align-items: center;
   padding-block: 10px;
 `;
 
 export const Rectangle = styled.div<ColorResultStyleProps>`
-  display: flex;
-  width: 150px;
   height: 45px;
+  width: 150px;
+  display: flex;
   border-radius: 6px;
-  justify-content: center;
   align-items: center;
-  background-color: ${(props) => props.color || `${theme.colors.light_cian}`};
-  color: ${theme.colors.white};
+  justify-content: center;
+  box-shadow: ${theme.box.shadow};
+  background-color: ${(props) => props.color};
+  color: ${(props) => {
+    const getLuminance = (hexColor: any) => {
+      const r = parseInt(hexColor.slice(1, 3), 16);
+      const g = parseInt(hexColor.slice(3, 5), 16);
+      const b = parseInt(hexColor.slice(5, 7), 16);
+      return (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    };
+
+    const backgroundLuminance = getLuminance(props.color);
+
+    return backgroundLuminance > 0.5
+      ? `${theme.colors.primary}`
+      : `${theme.colors.white}`;
+  }};
+
   ${(props) =>
-    props.fz &&
+    props.variant === 'light' &&
     css`
       font-size: 12px;
       width: 70px;
+      color: ${theme.colors.primary};
+    `}
+  ${(props) =>
+    props.variant === 'dark' &&
+    css`
+      font-size: 12px;
+      width: 70px;
+      color: ${theme.colors.white};
     `}
 `;
 
@@ -31,7 +56,7 @@ export const CheckCircular = styled.div`
   border: 1.5px solid ${theme.colors.gray_400};
   border-radius: 50%;
   margin: 0 10px;
-  background-color: #77d353;
+  background-color: ${theme.colors.success};
 
   &::after {
     content: '\u2713';
@@ -50,7 +75,7 @@ export const ErrorCircular = styled.div`
   border: 1.5px solid ${theme.colors.gray_400};
   border-radius: 50%;
   margin: 0 10px;
-  background-color: #ff9494;
+  background-color: ${theme.colors.error};
   &::after {
     content: 'x';
     position: absolute;
@@ -63,5 +88,13 @@ export const ErrorCircular = styled.div`
 `;
 
 export const Duration = styled.div`
-  font-size: 16px;
+  font-size: 15px;
+  color: ${theme.colors.primary};
+`;
+
+export const Container = styled.div`
+  flex: 1;
+  display: flex;
+  margin-left: 5px;
+  justify-content: flex-start;
 `;
