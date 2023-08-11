@@ -14,15 +14,11 @@ export const ButtonWrapper = styled.button<ButtonGruopProps>`
   padding: 10px;
   font-size: 16px;
   cursor: pointer;
-  color: ${(props) =>
-    props.selected ? theme.colors.white : theme.colors.gray_500};
-  background-color: ${(props) =>
-    props.selected ? theme.colors.light_purple : theme.colors.white};
+  color: ${theme.colors.gray_500};
+  background-color: ${theme.colors.white};
   &:hover {
-    background-color: ${(props) =>
-      props.selected ? theme.colors.light_green : theme.colors.hover};
-    color: ${(props) =>
-      props.selected ? theme.colors.light_purple : theme.colors.gray_300};
+    background-color: ${theme.colors.hover};
+    color: ${theme.colors.gray_300};
   }
   ${(props) =>
     props.blr &&
