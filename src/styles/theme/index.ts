@@ -41,7 +41,9 @@ export default {
     light_green: '#05ffa1',
     light_purple: '#b967ff',
     light_yellow: '#fffb96',
-    hover: '#f0f0f0'
+    hover: '#f0f0f0',
+    error: '#ff9494',
+    success: '#77d353'
   },
   spacings: {
     xxxsmall: '0.8rem',

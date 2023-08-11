@@ -6,12 +6,13 @@ import ScoreBoard from '@/components/ScoreBoard';
 import Title from '@/components/Title';
 import Sidebar from '@/components/Sidebar';
 import ScrollSection from '@/components/ScrollSection';
-import { AppContainer, MainContent, ScoreContainer } from '@/styles/global';
-import ColorResult from '@/components/ColorResult';
+import { AppContainer, MainContent } from '@/styles/global';
+
 import Button from '@/components/Button';
 import { useHighScore } from '@/store/usehighScore';
 import { generateRandomHexdecimalColor } from '@/utils/generateRandomColor';
 import { useStartApp } from '@/store/useStartApp';
+import ScoreHistory from '@/components/ScoreHistory';
 
 type colorHistory = {
   successColor: string;
@@ -168,14 +169,14 @@ export default function Home() {
           <div style={{ paddingInline: 20 }}>
             {history
               .map((item, index) => (
-                <ColorResult
+                <ScoreHistory
                   key={index}
                   successLabel={item.successColor}
                   errorLabel={item.errorColor}
                   type={
                     item.successColor === item.errorColor ? 'success' : 'error'
                   }
-                  timezone={item.timeToSelect}
+                  time={item.timeToSelect}
                   color={item.errorColor}
                 />
               ))
