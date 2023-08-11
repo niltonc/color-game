@@ -3,7 +3,11 @@ import { useGlobalStore } from '../useGlobalStore';
 import { getValue, saveValue } from '@/utils/storage';
 
 const usePersistedHighScore = () => {
-  const { highScore, setHighScore, clearHighScore } = useGlobalStore();
+  const {
+    highScore: updateHighScore,
+    setHighScore,
+    clearHighScore
+  } = useGlobalStore();
 
   useEffect(() => {
     const initialStoredHighScore = getValue('highScore');
@@ -13,10 +17,10 @@ const usePersistedHighScore = () => {
   }, [setHighScore]);
 
   useEffect(() => {
-    saveValue('highScore', highScore.toString());
-  }, [highScore]);
+    saveValue('highScore', updateHighScore.toString());
+  }, [updateHighScore]);
 
-  return { highScore, setHighScore, clearHighScore };
+  return { updateHighScore, setHighScore, clearHighScore };
 };
 
 export { usePersistedHighScore };
