@@ -8,7 +8,7 @@ import Sidebar from '@/components/Sidebar';
 import ScrollSection from '@/components/ScrollSection';
 import { AppContainer, MainContent, ScoreContainer } from '@/styles/global';
 import ColorResult from '@/components/ColorResult';
-import Button from '@/components/button';
+import Button from '@/components/Button';
 import { useHighScore } from '@/store/usehighScore';
 import { generateRandomHexdecimalColor } from '@/utils/generateRandomColor';
 import { useStartApp } from '@/store/useStartApp';
@@ -214,7 +214,7 @@ export default function Home() {
           </div>
           <div style={{ width: 450, background: 'red' }}>
             <SquareGameColor
-              // onEasyMode={() => start('easy')}
+              onEasyMode={() => start('easy')}
               onMediumMode={() => start('medium')}
               onHardMode={() => start('hard')}
               color={correctColor}
@@ -224,10 +224,11 @@ export default function Home() {
           {isStart && (
             <div style={{ paddingBlock: 15 }}>
               <ButtonGroup.Root>
-                {colors.map((color) => (
+                {colors.map((color, index) => (
                   <ButtonGroup.Item
                     key={color}
                     onClick={() => selectOption(color, correctColor)}
+                    blr={index > 0 && index < colors.length - 1}
                   >
                     {color}
                   </ButtonGroup.Item>

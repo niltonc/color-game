@@ -1,13 +1,8 @@
 import { ButtonWrapper } from './styles';
 
-const Button: React.FC<ButtonGruopProps> = ({
-  selected,
-  children,
-  blr,
-  ...rest
-}) => {
+const Button: React.FC<ButtonGruopProps> = ({ children, blr, ...rest }) => {
   return (
-    <ButtonWrapper selected={selected} blr={blr} {...rest}>
+    <ButtonWrapper blr={blr} {...rest}>
       {children}
     </ButtonWrapper>
   );
