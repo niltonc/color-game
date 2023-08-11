@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import ColorSquare from '@/components/colorSquare';
+import SquareGameColor from '@/components/SquareGameColor';
 import { ButtonGroup } from '@/components/ButtonGroup';
 import ScoreBoard from '@/components/ScoreBoard';
 import Title from '@/components/Title';
@@ -9,8 +9,9 @@ import ScrollSection from '@/components/ScrollSection';
 import { AppContainer, MainContent, ScoreContainer } from '@/styles/global';
 import ColorResult from '@/components/ColorResult';
 import Button from '@/components/button';
-import useHighScore from '@/store/usehighScore';
+import { useHighScore } from '@/store/usehighScore';
 import { generateRandomHexdecimalColor } from '@/utils/generateRandomColor';
+import { useStartApp } from '@/store/useStartApp';
 
 type colorHistory = {
   successColor: string;
@@ -27,7 +28,8 @@ export default function Home() {
   const [score, setScore] = useState(0);
 
   const [time, setTime] = useState(30);
-  const [isRunning, setIsRunning] = useState(false);
+  const { isStart, setIsStart } = useStartApp((state) => state);
+  const { highScore, setHighScore } = useHighScore((state) => state);
 
   const progress = (time / 30) * 100;
 
@@ -35,7 +37,7 @@ export default function Home() {
 
   const startTime = () => {
     setTime(30);
-    setIsRunning(true);
+    setIsStart(true);
   };
 
   const setDifficultMode = (difficult: string) => {
@@ -79,8 +81,6 @@ export default function Home() {
     setColorOptions(numcolors);
   };
 
-  const { highScore, setHighScore } = useHighScore((state) => state);
-
   const stop = () => {
     if (score > highScore) {
       setHighScore(score);
@@ -91,7 +91,7 @@ export default function Home() {
     setColors([]);
     setScore(0);
     setHistory([]);
-    setIsRunning(false);
+    setIsStart(false);
   };
 
   const selectOption = (color: string, successColor: string) => {
@@ -136,7 +136,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (isRunning) {
+    if (isStart) {
       const timer = setInterval(() => {
         if (time > 0) {
           setTime(time - 1);
@@ -147,10 +147,10 @@ export default function Home() {
 
       return () => clearInterval(timer);
     }
-  }, [isRunning, time]);
+  }, [isStart, time]);
 
   useEffect(() => {
-    if (isRunning) {
+    if (isStart) {
       if (time > 0 && time < 30) {
         if (time % 10 === 0 && !getTimeColorFromHistory(time)) {
           if (score > 0) {
@@ -159,7 +159,7 @@ export default function Home() {
         }
       }
     }
-  }, [isRunning, time]);
+  }, [isStart, time]);
 
   return (
     <AppContainer>
@@ -213,27 +213,28 @@ export default function Home() {
             />
           </div>
           <div style={{ width: 450, background: 'red' }}>
-            <ColorSquare
-              onEasyMode={() => start('easy')}
+            <SquareGameColor
+              // onEasyMode={() => start('easy')}
               onMediumMode={() => start('medium')}
               onHardMode={() => start('hard')}
               color={correctColor}
               progress={progress}
             />
           </div>
-
-          <div style={{ paddingBlock: 15 }}>
-            <ButtonGroup.Root>
-              {colors.map((color) => (
-                <ButtonGroup.Item
-                  key={color}
-                  onClick={() => selectOption(color, correctColor)}
-                >
-                  {color}
-                </ButtonGroup.Item>
-              ))}
-            </ButtonGroup.Root>
-          </div>
+          {isStart && (
+            <div style={{ paddingBlock: 15 }}>
+              <ButtonGroup.Root>
+                {colors.map((color) => (
+                  <ButtonGroup.Item
+                    key={color}
+                    onClick={() => selectOption(color, correctColor)}
+                  >
+                    {color}
+                  </ButtonGroup.Item>
+                ))}
+              </ButtonGroup.Root>
+            </div>
+          )}
         </div>
       </MainContent>
       <Button variant="text" onClick={stop}>
