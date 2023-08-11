@@ -7,14 +7,6 @@ export const saveObject = (key: any, object: any) => {
   saveValue(key, jsonValue);
 };
 
-export const saveCountry = (key: any, value: any) => {
-  window.localStorage.setItem(key, value);
-};
-
-export const getCountry = (key: any, value: any) => {
-  window.localStorage.setItem(key, value);
-};
-
 export const getValue = (key: any) => window.localStorage.getItem(key);
 
 export const getObject = (key: string) => {
