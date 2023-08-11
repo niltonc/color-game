@@ -1,3 +1,4 @@
+import theme from '@/styles/theme';
 import styled from 'styled-components';
 
 export const SectionWrapper = styled.section`
@@ -12,11 +13,11 @@ export const ScrollableContent = styled.div`
     width: 5px;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: #b8b8b8;
+    background-color: ${theme.colors.gray_200};
     border-radius: 3px;
   }
   &::-webkit-scrollbar-track {
-    background-color: #f7f7f8;
+    background-color: ${theme.colors.hover};
   }
 `;
 

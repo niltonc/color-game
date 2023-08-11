@@ -15,7 +15,7 @@ export const ButtonWrapper = styled.button<ButtonGruopProps>`
   padding: 10px;
   cursor: pointer;
   color: ${theme.colors.gray_500};
-  font-size: ${theme.font.sizes.xxxsmall};
+  font-size: 15px;
   background-color: ${theme.colors.gray_50};
   &:hover {
     background-color: ${theme.colors.gray_400};
