@@ -8,12 +8,12 @@ interface ButtonGruopProps
   blr?: boolean;
 }
 interface ColorResultStyleProps {
-  fz?: boolean;
+  variant?: 'light' | 'dark';
 }
 type ColorResultProps = {
   type?: 'success' | 'error';
   color?: string;
-  timezone?: number;
+  time?: number;
   errorLabel?: string;
   successLabel?: string;
 };
