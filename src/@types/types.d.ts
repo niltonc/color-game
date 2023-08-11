@@ -24,6 +24,9 @@ type ColorResultProps = {
 interface ColorSquareProps {
   color: string;
   progress: number;
+  onEasyMode?: () => void;
+  onMediumMode?: () => void;
+  onHardMode?: () => void;
 }
 interface SquareStyleProps {
   color?: string;
