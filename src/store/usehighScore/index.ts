@@ -1,4 +1,4 @@
-import { saveValue } from '@/utils/storage';
+import { getValue, saveValue } from '@/utils/storage';
 import create from 'zustand';
 
 export interface GlobalData {
@@ -7,7 +7,7 @@ export interface GlobalData {
 }
 
 const useHighScore = create<GlobalData>((set) => ({
-  highScore: Number(localStorage.getItem('highScore')) || 0,
+  highScore: Number(getValue('highScore')) || 0,
   setHighScore: (score) => {
     saveValue('highScore', String(score));
     set({ highScore: score });
