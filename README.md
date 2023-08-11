@@ -31,6 +31,7 @@ A TypeScript starter for Next.js that includes all you need to build amazing pro
 - 💖 **Prettier** - Opinionated Code Formatter
 - 🚫 **lint-staged** - Run linters against staged git files
 - 💅 **Styled Components** - Use the best bits of ES6 and CSS to style your apps without stress
+- 🚥 **Zustand** - A small, fast and scalable bearbones state-management solution using simplified flux principles.
 
 ### 🚀 Getting started
 
@@ -43,7 +44,7 @@ npx create-next-app project-name -e https://github.com/niltonc/color-game
 If you prefer you can clone this repository and run the following commands inside the project folder:
 
 1. `npm install` or `yarn`;
-2. `yarn dev`;
+2. `yarn run dev`;
 
 To view the project open `http://localhost:3000`.
 
