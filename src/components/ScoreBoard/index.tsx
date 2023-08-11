@@ -8,7 +8,7 @@ import {
   Text
 } from './styles';
 
-const PointControler: React.FC<PointControler> = ({
+const ScoreBoard: React.FC<PointControler> = ({
   score = 0,
   highScore = 0,
   time = 0,
@@ -43,4 +43,4 @@ const PointControler: React.FC<PointControler> = ({
   );
 };
 
-export default PointControler;
+export default ScoreBoard;

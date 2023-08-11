@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import theme from '@/styles/theme';
 
 export const SquareContainer = styled.div`
-  width: 350px;
+  width: 100%;
   height: 350px;
   position: relative;
   background-color: ${(props) => props.color};

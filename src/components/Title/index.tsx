@@ -1,18 +1,13 @@
-import { getColor } from '@/utils/getColor';
 import React from 'react';
-import { ColorfulText } from './styles';
+import * as S from './styles';
 
-const Title = () => {
-  const text = ' COLOR';
+const Title: React.FC = () => {
   return (
-    <ColorfulText>
-      GUESS THE
-      {text.split('').map((char, index) => (
-        <span key={index} style={{ color: getColor(index) }}>
-          {char}
-        </span>
-      ))}
-    </ColorfulText>
+    <S.Title>
+      <S.TitleWord1>GUESS</S.TitleWord1>
+      <S.TitleWord2>THE</S.TitleWord2>
+      <S.TitleWord3>COLOR</S.TitleWord3>
+    </S.Title>
   );
 };
 

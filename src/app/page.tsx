@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import ColorSquare from '@/components/colorSquare';
 import { ButtonGroup } from '@/components/ButtonGroup';
-import PointControler from '@/components/score';
-import ColorfulTextComponent from '@/components/Title';
+import ScoreBoard from '@/components/ScoreBoard';
+import Title from '@/components/Title';
 import Sidebar from '@/components/Sidebar';
 import ScrollSection from '@/components/ScrollSection';
 import { AppContainer, MainContent, ScoreContainer } from '@/styles/global';
@@ -203,30 +203,24 @@ export default function Home() {
 
       <MainContent>
         <div>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center'
-            }}
-          >
-            <ColorfulTextComponent />
-          </div>
+          <Title />
           <div style={{ paddingBlock: 15 }}>
-            <PointControler
+            <ScoreBoard
               score={score}
               highScore={highScore}
               time={time}
               onReset={stop}
             />
           </div>
-
-          <ColorSquare
-            onEasyMode={() => start('easy')}
-            onMediumMode={() => start('medium')}
-            onHardMode={() => start('hard')}
-            color={correctColor}
-            progress={progress}
-          />
+          <div style={{ width: 450, background: 'red' }}>
+            <ColorSquare
+              onEasyMode={() => start('easy')}
+              onMediumMode={() => start('medium')}
+              onHardMode={() => start('hard')}
+              color={correctColor}
+              progress={progress}
+            />
+          </div>
 
           <div style={{ paddingBlock: 15 }}>
             <ButtonGroup.Root>
