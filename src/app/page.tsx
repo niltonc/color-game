@@ -164,23 +164,6 @@ export default function Home() {
   return (
     <AppContainer>
       <Sidebar>
-        <div
-          style={{
-            fontWeight: 'bold',
-            fontSize: 18,
-            paddingInline: 20,
-            marginTop: 20
-          }}
-        >
-          Current/Lastest Game
-        </div>
-
-        <ScoreContainer>
-          <div style={{ fontSize: 15 }}>Guessed Color</div>
-          <div style={{ fontSize: 15 }}>Correct Color</div>
-          <div style={{ fontSize: 15 }}>Score</div>
-        </ScoreContainer>
-
         <ScrollSection>
           <div style={{ paddingInline: 20 }}>
             {history

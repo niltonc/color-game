@@ -28,12 +28,3 @@ export const MainContent = styled.div`
   flex-direction: column;
   margin-top: 25px;
 `;
-
-export const ScoreContainer = styled.div`
-  padding: 5px;
-  display: flex;
-  margin-top: 10px;
-  align-items: center;
-  border-top: 2px solid ${theme.colors.gray_100};
-  padding-inline: 20px;
-`;
