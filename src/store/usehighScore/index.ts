@@ -1,16 +1,14 @@
 import create from 'zustand';
 
-export interface GlobalData {
+export interface HighScoreData {
   highScore: number;
   setHighScore: (payload: number) => void;
 }
 
-const useHighScore = create<GlobalData>((set) => ({
+export const useHighScore = create<HighScoreData>((set) => ({
   highScore: Number(localStorage.getItem('highScore')) || 0,
   setHighScore: (score) => {
     localStorage.setItem('highScore', String(score));
     set({ highScore: score });
   }
 }));
-
-export default useHighScore;
