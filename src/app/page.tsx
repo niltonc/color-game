@@ -12,6 +12,12 @@ import Button from '@/components/button';
 import useHighScore from '@/store/usehighScore';
 import { generateRandomHexdecimalColor } from '@/utils/generateRandomColor';
 
+type colorHistory = {
+  successColor: string;
+  errorColor: string;
+  timeToSelect: number;
+};
+
 export default function Home() {
   const [difficultLevel, setDifficultLevel] = useState<string>('easy');
   const [correctColor, setCorrectColor] = useState<string>(
@@ -25,13 +31,13 @@ export default function Home() {
 
   const progress = (time / 30) * 100;
 
-  /* Função de inicio */
+  const [history, setHistory] = useState<colorHistory[]>([]);
+
   const startTime = () => {
     setTime(30);
     setIsRunning(true);
   };
 
-  /* Função para setar a dificuldade do jogo */
   const setDifficultMode = (difficult: string) => {
     setDifficultLevel(difficult);
 
@@ -46,7 +52,6 @@ export default function Home() {
     return numColors;
   };
 
-  /* Função para setar as opções de cores */
   const setColorOptions = (numColors: number) => {
     const correctHexdecimalColor = generateRandomHexdecimalColor();
     setCorrectColor(correctHexdecimalColor);
@@ -66,7 +71,6 @@ export default function Home() {
     setColors(colors);
   };
 
-  /* Função principal para iniciar */
   const start = (difficult: string) => {
     startTime();
 
@@ -77,7 +81,6 @@ export default function Home() {
 
   const { highScore, setHighScore } = useHighScore((state) => state);
 
-  /* Função principal para finalizar */
   const stop = () => {
     if (score > highScore) {
       setHighScore(score);
@@ -87,21 +90,48 @@ export default function Home() {
     setCorrectColor(generateRandomHexdecimalColor());
     setColors([]);
     setScore(0);
+    setHistory([]);
     setIsRunning(false);
   };
 
-  /* Função para selecionar uma opção */
-  const selectOption = (color: string) => {
-    if (color === correctColor) {
+  const selectOption = (color: string, successColor: string) => {
+    if (color == correctColor) {
+      setHistory([
+        ...history,
+        { successColor, errorColor: color, timeToSelect: 30 - time }
+      ]);
+
       setScore(score + 5);
 
       const numcolors = setDifficultMode(difficultLevel);
 
       setColorOptions(numcolors);
     } else {
+      setHistory([
+        ...history,
+        { successColor, errorColor: color, timeToSelect: 30 - time }
+      ]);
+
       if (score > 0) {
         setScore(score - 1);
       }
+    }
+  };
+
+  const getTimeColorFromHistory = (time: number) => {
+    const currentTime = 30 - time;
+    const intervalStart = currentTime - 10;
+    const intervalEnd = currentTime;
+
+    const hasColorInInterval = history.some(
+      (item) =>
+        item.timeToSelect >= intervalStart && item.timeToSelect <= intervalEnd
+    );
+
+    if (hasColorInInterval) {
+      return true;
+    } else {
+      return false;
     }
   };
 
@@ -122,7 +152,7 @@ export default function Home() {
   useEffect(() => {
     if (isRunning) {
       if (time > 0 && time < 30) {
-        if (time % 10 === 0) {
+        if (time % 10 === 0 && !getTimeColorFromHistory(time)) {
           if (score > 0) {
             setScore(score - 2);
           }
@@ -153,8 +183,20 @@ export default function Home() {
 
         <ScrollSection>
           <div style={{ paddingInline: 20 }}>
-            <ColorResult type="success" color="red" />
-            <ColorResult type="error" errorLabel="color" successLabel="color" />
+            {history
+              .map((item, index) => (
+                <ColorResult
+                  key={index}
+                  successLabel={item.successColor}
+                  errorLabel={item.errorColor}
+                  type={
+                    item.successColor === item.errorColor ? 'success' : 'error'
+                  }
+                  timezone={item.timeToSelect}
+                  color={item.errorColor}
+                />
+              ))
+              .reverse()}
           </div>
         </ScrollSection>
       </Sidebar>
@@ -191,7 +233,7 @@ export default function Home() {
               {colors.map((color) => (
                 <ButtonGroup.Item
                   key={color}
-                  onClick={() => selectOption(color)}
+                  onClick={() => selectOption(color, correctColor)}
                 >
                   {color}
                 </ButtonGroup.Item>

@@ -17,7 +17,7 @@ interface ColorResultStyleProps {
 type ColorResultProps = {
   type?: 'success' | 'error';
   color?: string;
-  timezone?: string;
+  timezone?: number;
   errorLabel?: string;
   successLabel?: string;
 };
