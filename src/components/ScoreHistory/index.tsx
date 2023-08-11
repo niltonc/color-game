@@ -8,7 +8,7 @@ import {
   Rectangle
 } from './styles';
 
-const ScoreHistory: React.FC<ColorResultProps> = ({
+const ScoreHistory: React.FC<ScoreHistoryProps> = ({
   type = 'success',
   color = '',
   time = 0,

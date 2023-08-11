@@ -1,13 +1,4 @@
-import { useEffect } from 'react';
 import { create } from 'zustand';
-
-export interface GlobalData {
-  highScore: number;
-  setHighScore: (payload: number) => void;
-  clearHighScore: () => void;
-  isStart: boolean;
-  setIsStart: (payload: boolean) => void;
-}
 
 const useGlobalStore = create<GlobalData>((set) => ({
   highScore: 0,

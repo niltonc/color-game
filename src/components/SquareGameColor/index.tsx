@@ -6,7 +6,7 @@ import Crown from '@/assets/crown-alt.svg';
 import Heart from '@/assets/heart-half-vertical.svg';
 import { useGlobalStore } from '@/store/useGlobalStore';
 
-const SquareGameColor: React.FC<ColorSquareProps> = ({
+const SquareGameColor: React.FC<SquareGameColorProps> = ({
   color = '',
   progress = 0,
   onEasyMode,

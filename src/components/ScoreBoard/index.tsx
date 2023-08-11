@@ -8,7 +8,7 @@ import {
   Text
 } from './styles';
 
-const ScoreBoard: React.FC<PointControler> = ({
+const ScoreBoard: React.FC<ScoreBoardProps> = ({
   score = 0,
   highScore = 0,
   time = 0,

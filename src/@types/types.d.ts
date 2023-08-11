@@ -1,5 +1,4 @@
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'text';
   children?: React.ReactNode;
 }
 interface ButtonGruopProps
@@ -10,14 +9,14 @@ interface ButtonGruopProps
 interface ColorResultStyleProps {
   variant?: 'light' | 'dark';
 }
-type ColorResultProps = {
+type ScoreHistoryProps = {
   type?: 'success' | 'error';
   color?: string;
   time?: number;
   errorLabel?: string;
   successLabel?: string;
 };
-interface ColorSquareProps {
+interface SquareGameColorProps {
   color: string;
   progress: number;
   onEasyMode?: () => void;
@@ -29,7 +28,7 @@ interface SquareStyleProps {
   progress?: number;
 }
 
-interface PointControler {
+interface ScoreBoardProps {
   score?: number;
   highScore?: number;
   time?: number;
@@ -41,3 +40,14 @@ interface ChildrenProp {
 interface ScoreBoardStyleProps {
   binline?: boolean;
 }
+interface GlobalData {
+  highScore: number;
+  setHighScore: (payload: number) => void;
+  clearHighScore: () => void;
+  isStart: boolean;
+  setIsStart: (payload: boolean) => void;
+}
+
+type DifficultModes = {
+  [key: string]: number;
+};
