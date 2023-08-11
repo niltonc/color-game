@@ -9,79 +9,127 @@ import ScrollSection from '@/components/ScrollSection';
 import { AppContainer, MainContent, ScoreContainer } from '@/styles/global';
 import ColorResult from '@/components/ColorResult';
 import Button from '@/components/button';
-
-type ColorHistoryEntry = {
-  color: string;
-  success: boolean;
-};
+import useHighScore from '@/store/usehighScore';
+import { generateRandomHexdecimalColor } from '@/utils/generateRandomColor';
 
 export default function Home() {
-  const [selectedButton, setSelectedButton] = useState(0);
+  const [difficultLevel, setDifficultLevel] = useState<string>('easy');
+  const [correctColor, setCorrectColor] = useState<string>(
+    generateRandomHexdecimalColor()
+  );
+  const [colors, setColors] = useState<string[]>([]);
   const [score, setScore] = useState(0);
-  const [highScore, setHighScore] = useState(0);
-  const [time, setTime] = useState(10);
-  const [currentColor, setCurrentColor] = useState('#000000');
-  const [gameInProgress, setGameInProgress] = useState(false);
-  const [colorHistory, setColorHistory] = useState<ColorHistoryEntry[]>([]);
 
-  const handleButtonClick = (buttonIndex: number) => {
-    if (selectedButton === buttonIndex && gameInProgress) {
-      setScore(score + 5);
-      setTime(time + 1);
-    } else {
-      setScore(score - 1);
-      setTime(time - 2);
+  const [time, setTime] = useState(30);
+  const [isRunning, setIsRunning] = useState(false);
+
+  const progress = (time / 30) * 100;
+
+  /* Função de inicio */
+  const startTime = () => {
+    setTime(30);
+    setIsRunning(true);
+  };
+
+  /* Função para setar a dificuldade do jogo */
+  const setDifficultMode = (difficult: string) => {
+    setDifficultLevel(difficult);
+
+    const difficultModes: Record<string, number> = {
+      easy: 3,
+      medium: 4,
+      hard: 5
+    };
+
+    const numColors = difficultModes[difficult] || difficultModes['easy'];
+
+    return numColors;
+  };
+
+  /* Função para setar as opções de cores */
+  const setColorOptions = (numColors: number) => {
+    const correctHexdecimalColor = generateRandomHexdecimalColor();
+    setCorrectColor(correctHexdecimalColor);
+
+    const colors: string[] = [];
+
+    for (let i = 0; i < numColors - 1; i++) {
+      const randomIncorrectColor = generateRandomHexdecimalColor();
+
+      colors.push(randomIncorrectColor);
     }
 
-    const newColor = generateRandomColor();
-    setColorHistory([
-      ...colorHistory,
-      { color: currentColor, success: selectedButton === buttonIndex }
-    ]);
-    setCurrentColor(newColor);
-    setSelectedButton(0);
+    const colorPositionOnColors = Math.floor(Math.random() * numColors);
+
+    colors.splice(colorPositionOnColors, 0, correctHexdecimalColor);
+
+    setColors(colors);
   };
 
-  const handleStartGame = () => {
-    setScore(0);
-    setTime(10);
-    setCurrentColor(generateRandomColor());
-    setColorHistory([]);
-    setGameInProgress(true);
+  /* Função principal para iniciar */
+  const start = (difficult: string) => {
+    startTime();
+
+    const numcolors = setDifficultMode(difficult);
+
+    setColorOptions(numcolors);
   };
 
-  useEffect(() => {
+  const { highScore, setHighScore } = useHighScore((state) => state);
+
+  /* Função principal para finalizar */
+  const stop = () => {
     if (score > highScore) {
       setHighScore(score);
     }
 
-    if (gameInProgress && time > 0) {
-      const timer = setTimeout(() => {
-        setTime(time - 1);
+    setTime(30);
+    setCorrectColor(generateRandomHexdecimalColor());
+    setColors([]);
+    setScore(0);
+    setIsRunning(false);
+  };
+
+  /* Função para selecionar uma opção */
+  const selectOption = (color: string) => {
+    if (color === correctColor) {
+      setScore(score + 5);
+
+      const numcolors = setDifficultMode(difficultLevel);
+
+      setColorOptions(numcolors);
+    } else {
+      if (score > 0) {
+        setScore(score - 1);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (isRunning) {
+      const timer = setInterval(() => {
+        if (time > 0) {
+          setTime(time - 1);
+        } else {
+          stop();
+        }
       }, 1000);
 
-      return () => clearTimeout(timer);
-    } else {
-      setGameInProgress(false);
+      return () => clearInterval(timer);
     }
-  }, [score, highScore, time, gameInProgress]);
+  }, [isRunning, time]);
 
-  const generateRandomColor = () => {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
+  useEffect(() => {
+    if (isRunning) {
+      if (time > 0 && time < 30) {
+        if (time % 10 === 0) {
+          if (score > 0) {
+            setScore(score - 2);
+          }
+        }
+      }
     }
-    return color;
-  };
-
-  const handleReset = () => {
-    setScore(0);
-    setTime(10);
-    setCurrentColor(generateRandomColor());
-    setColorHistory([]);
-    setGameInProgress(false);
-  };
+  }, [isRunning, time]);
 
   return (
     <AppContainer>
@@ -126,38 +174,33 @@ export default function Home() {
               score={score}
               highScore={highScore}
               time={time}
-              onReset={handleReset}
+              onReset={stop}
             />
           </div>
 
-          <ColorSquare color={currentColor} progress={50} />
+          <ColorSquare
+            onEasyMode={() => start('easy')}
+            onMediumMode={() => start('medium')}
+            onHardMode={() => start('hard')}
+            color={correctColor}
+            progress={progress}
+          />
 
           <div style={{ paddingBlock: 15 }}>
             <ButtonGroup.Root>
-              <ButtonGroup.Item
-                selected={selectedButton === 1}
-                onClick={() => handleButtonClick(1)}
-              >
-                #012s2
-              </ButtonGroup.Item>
-              <ButtonGroup.Item
-                blr
-                selected={selectedButton === 2}
-                onClick={() => handleButtonClick(2)}
-              >
-                #01cdfe
-              </ButtonGroup.Item>
-              <ButtonGroup.Item
-                selected={selectedButton === 3}
-                onClick={() => handleButtonClick(3)}
-              >
-                #01c124
-              </ButtonGroup.Item>
+              {colors.map((color) => (
+                <ButtonGroup.Item
+                  key={color}
+                  onClick={() => selectOption(color)}
+                >
+                  {color}
+                </ButtonGroup.Item>
+              ))}
             </ButtonGroup.Root>
           </div>
         </div>
       </MainContent>
-      <Button variant="text" onClick={() => handleReset()}>
+      <Button variant="text" onClick={stop}>
         Reset All
       </Button>
     </AppContainer>
