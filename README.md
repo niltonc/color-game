@@ -57,4 +57,6 @@ To view the project open `http://localhost:3000`.
 3. Commit your changes: `git commit -m 'Add some feature'`;
 4. Push to the branch: `git push origin my-new-feature`.
 
-## **After your pull request is merged**, you can safely delete your branch.
+## Documentation
+
+[Click here to go to Documentation](./.github/Documentation.md)
