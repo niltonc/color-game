@@ -21,7 +21,7 @@ import {
   progress
 } from '@/utils/constants';
 import { randomColorOptionsGenerator } from '@/utils/randomColorOptionsGenerator';
-import { startTimer } from '@/utils/startTimer';
+import { startTimer, updateTimer } from '@/utils/timer';
 
 export default function Home() {
   const { highScore, isStart, setIsStart } = useGlobalStore((state) => state);
@@ -89,16 +89,11 @@ export default function Home() {
   useEffect(() => {
     if (isStart) {
       const timer = setInterval(() => {
-        if (time > 0) {
-          setTime(time - 1);
-        } else {
-          stopGame();
-        }
+        updateTimer(time, setTime, stopGame);
       }, 1000);
-
       return () => clearInterval(timer);
     }
-  }, [isStart, time]);
+  }, [isStart]);
 
   useEffect(() => {
     if (isStart) {
