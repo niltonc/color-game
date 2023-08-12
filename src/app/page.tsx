@@ -18,10 +18,10 @@ import { AppContainer, MainContent } from '@/styles/global';
 import {
   difficultMode,
   generateRandomHexdecimalColor,
-  progress,
-  startTimer
+  progress
 } from '@/utils/constants';
 import { randomColorOptionsGenerator } from '@/utils/randomColorOptionsGenerator';
+import { startTimer } from '@/utils/startTimer';
 
 export default function Home() {
   const { highScore, isStart, setIsStart } = useGlobalStore((state) => state);
@@ -75,21 +75,15 @@ export default function Home() {
     randomColorOptionsGenerator(numberOfButtons, setCorrectColor, setColors);
   };
 
-  const getTimeColorFromHistory = (time: number) => {
+  const getTimeColorForHistory = (time: number) => {
     const currentTime = 30 - time;
     const intervalStart = currentTime - 10;
     const intervalEnd = currentTime;
 
-    const hasColorInInterval = historyScore.some(
+    return historyScore.some(
       (item) =>
         item.timeToSelect >= intervalStart && item.timeToSelect <= intervalEnd
     );
-
-    if (hasColorInInterval) {
-      return true;
-    } else {
-      return false;
-    }
   };
 
   useEffect(() => {
@@ -109,7 +103,7 @@ export default function Home() {
   useEffect(() => {
     if (isStart) {
       if (time > 0 && time < 30) {
-        if (time % 10 === 0 && !getTimeColorFromHistory(time)) {
+        if (time % 10 === 0 && !getTimeColorForHistory(time)) {
           if (score > 0) {
             setScore(score - 2);
           }
