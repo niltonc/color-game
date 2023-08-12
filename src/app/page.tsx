@@ -13,16 +13,15 @@ import SquareGameColor from '@/components/SquareGameColor';
 
 import { useGlobalStore } from '@/store/useGlobalStore';
 import { usePersistedHighScore } from '@/store/usePersistedHighScore';
-import { generateRandomHexdecimalColor } from '@/utils/generateRandomColor';
 
 import { AppContainer, MainContent } from '@/styles/global';
-import { difficultMode, progress, startTimer } from '@/utils/constants';
-
-type colorHistory = {
-  successColor: string;
-  errorColor: string;
-  timeToSelect: number;
-};
+import {
+  difficultMode,
+  generateRandomHexdecimalColor,
+  progress,
+  startTimer
+} from '@/utils/constants';
+import { randomColorOptionsGenerator } from '@/utils/randomColorOptionsGenerator';
 
 export default function Home() {
   const { highScore, isStart, setIsStart } = useGlobalStore((state) => state);
@@ -31,7 +30,7 @@ export default function Home() {
   const [time, setTime] = useState(30);
   const [score, setScore] = useState(0);
   const [colors, setColors] = useState<string[]>([]);
-  const [history, setHistory] = useState<colorHistory[]>([]);
+  const [historyScore, setHistoryScore] = useState<HistoryScoreProps[]>([]);
   const [difficultyLevel, setDifficultyLevel] = useState<string>('easy');
   const [correctColor, setCorrectColor] = useState<string>(
     generateRandomHexdecimalColor()
@@ -39,72 +38,41 @@ export default function Home() {
 
   const setDifficultyMode = (difficult: string) => {
     setDifficultyLevel(difficult);
-    const numberButtons = difficultMode[difficult] || difficultMode['easy'];
-    return numberButtons;
+    const numberOfButtons = difficultMode[difficult] || difficultMode['easy'];
+    return numberOfButtons;
   };
 
-  const setColorOptions = (numColors: number) => {
-    const correctHexdecimalColor = generateRandomHexdecimalColor();
-    setCorrectColor(correctHexdecimalColor);
-
-    const colors: string[] = [];
-
-    for (let i = 0; i < numColors - 1; i++) {
-      const randomIncorrectColor = generateRandomHexdecimalColor();
-
-      colors.push(randomIncorrectColor);
-    }
-
-    const colorPositionOnColors = Math.floor(Math.random() * numColors);
-
-    colors.splice(colorPositionOnColors, 0, correctHexdecimalColor);
-
-    setColors(colors);
-  };
-
-  const start = (difficult: string) => {
+  const starGame = (difficult: string) => {
     startTimer(setTime, setIsStart);
-
-    const numcolors = setDifficultyMode(difficult);
-
-    setColorOptions(numcolors);
+    const numberOfButtons = setDifficultyMode(difficult);
+    randomColorOptionsGenerator(numberOfButtons, setCorrectColor, setColors);
   };
 
-  const stop = () => {
+  const stopGame = () => {
     if (score > highScore) {
       setHighScore(score);
     }
-
     setTime(30);
     setCorrectColor(generateRandomHexdecimalColor());
     setColors([]);
     setScore(0);
-    setHistory([]);
+    setHistoryScore([]);
     setIsStart(false);
   };
+  const handleColorSelectedOption = (color: string, successColor: string) => {
+    setHistoryScore([
+      ...historyScore,
+      { successColor, errorColor: color, timeToSelect: 30 - time }
+    ]);
 
-  const selectOption = (color: string, successColor: string) => {
-    if (color == correctColor) {
-      setHistory([
-        ...history,
-        { successColor, errorColor: color, timeToSelect: 30 - time }
-      ]);
-
+    if (color === correctColor) {
       setScore(score + 5);
-
-      const numcolors = setDifficultyMode(difficultyLevel);
-
-      setColorOptions(numcolors);
-    } else {
-      setHistory([
-        ...history,
-        { successColor, errorColor: color, timeToSelect: 30 - time }
-      ]);
-
-      if (score > 0) {
-        setScore(score - 1);
-      }
+    } else if (score > 0) {
+      setScore(score - 1);
     }
+
+    const numberOfButtons = setDifficultyMode(difficultyLevel);
+    randomColorOptionsGenerator(numberOfButtons, setCorrectColor, setColors);
   };
 
   const getTimeColorFromHistory = (time: number) => {
@@ -112,7 +80,7 @@ export default function Home() {
     const intervalStart = currentTime - 10;
     const intervalEnd = currentTime;
 
-    const hasColorInInterval = history.some(
+    const hasColorInInterval = historyScore.some(
       (item) =>
         item.timeToSelect >= intervalStart && item.timeToSelect <= intervalEnd
     );
@@ -130,7 +98,7 @@ export default function Home() {
         if (time > 0) {
           setTime(time - 1);
         } else {
-          stop();
+          stopGame();
         }
       }, 1000);
 
@@ -151,6 +119,7 @@ export default function Home() {
   }, [isStart, time]);
 
   const handleResetAll = () => {
+    stopGame();
     clearHighScore();
   };
 
@@ -159,7 +128,7 @@ export default function Home() {
       <Sidebar>
         <ScrollSection>
           <div style={{ paddingInline: 20 }}>
-            {history
+            {historyScore
               .map((item, index) => (
                 <ScoreHistory
                   key={index}
@@ -185,14 +154,14 @@ export default function Home() {
               score={score}
               highScore={highScore}
               time={time}
-              onReset={stop}
+              onReset={stopGame}
             />
           </div>
           <div style={{ width: 450, background: 'red' }}>
             <SquareGameColor
-              onEasyMode={() => start('easy')}
-              onMediumMode={() => start('medium')}
-              onHardMode={() => start('hard')}
+              onEasyMode={() => starGame('easy')}
+              onMediumMode={() => starGame('medium')}
+              onHardMode={() => starGame('hard')}
               color={correctColor}
               progress={progress(time)}
             />
@@ -203,7 +172,9 @@ export default function Home() {
                 {colors.map((color, index) => (
                   <ButtonGroup.Item
                     key={color}
-                    onClick={() => selectOption(color, correctColor)}
+                    onClick={() =>
+                      handleColorSelectedOption(color, correctColor)
+                    }
                     blr={index > 0 && index < colors.length - 1}
                   >
                     {color}

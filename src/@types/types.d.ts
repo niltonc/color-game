@@ -51,3 +51,9 @@ interface GlobalData {
 type DifficultModes = {
   [key: string]: number;
 };
+
+type HistoryScoreProps = {
+  successColor: string;
+  errorColor: string;
+  timeToSelect: number;
+};
