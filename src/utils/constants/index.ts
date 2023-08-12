@@ -1,3 +1,6 @@
+export const generateRandomHexdecimalColor = () =>
+  `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+
 export const progress = (time: number) => (time / 30) * 100;
 
 export const startTimer = (
