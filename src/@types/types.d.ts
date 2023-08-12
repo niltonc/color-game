@@ -7,7 +7,7 @@ interface ButtonGruopProps
   blr?: boolean;
 }
 interface ColorResultStyleProps {
-  variant?: 'light' | 'dark';
+  variant?: 'light' | 'dark' | 'success';
 }
 type ScoreHistoryProps = {
   type?: 'success' | 'error';

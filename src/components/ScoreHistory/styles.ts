@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
 import theme from '@/styles/theme';
-import { readableColor } from 'polished';
 
 export const ColorResultContainer = styled.div`
   flex: 1;
@@ -11,8 +10,9 @@ export const ColorResultContainer = styled.div`
 
 export const Rectangle = styled.div<ColorResultStyleProps>`
   height: 45px;
-  width: 150px;
+  width: 148px;
   display: flex;
+  font-size: 15px;
   border-radius: 6px;
   align-items: center;
   justify-content: center;
@@ -50,13 +50,12 @@ export const Rectangle = styled.div<ColorResultStyleProps>`
 `;
 
 export const CheckCircular = styled.div`
-  position: relative;
   width: 20px;
   height: 20px;
-  border: 1.5px solid ${theme.colors.gray_400};
+  position: relative;
   border-radius: 50%;
-  margin: 0 10px;
   background-color: ${theme.colors.success};
+  border: 1.5px solid ${theme.colors.gray_400};
 
   &::after {
     content: '\u2713';
@@ -69,13 +68,12 @@ export const CheckCircular = styled.div`
   }
 `;
 export const ErrorCircular = styled.div`
-  position: relative;
   width: 20px;
   height: 20px;
-  border: 1.5px solid ${theme.colors.gray_400};
+  position: relative;
   border-radius: 50%;
-  margin: 0 10px;
   background-color: ${theme.colors.error};
+  border: 1.5px solid ${theme.colors.gray_400};
   &::after {
     content: 'x';
     position: absolute;
@@ -94,7 +92,8 @@ export const Duration = styled.div`
 
 export const Container = styled.div`
   flex: 1;
+  gap: 5px;
   display: flex;
-  margin-left: 5px;
+  padding-left: 8px;
   justify-content: flex-start;
 `;
