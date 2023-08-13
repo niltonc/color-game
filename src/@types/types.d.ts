@@ -1,5 +1,6 @@
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
+  variant?: 'primary' | 'outline' | 'text';
 }
 interface ButtonGruopProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
