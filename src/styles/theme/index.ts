@@ -42,6 +42,7 @@ export default {
     light_purple: '#b967ff',
     light_yellow: '#fffb96',
     hover: '#f0f0f0',
+    focus: '#1c77cf',
     error: '#ff9494',
     success: '#77d353'
   },

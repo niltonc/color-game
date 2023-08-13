@@ -1,11 +1,9 @@
 import styled, { css } from 'styled-components';
 import theme from '@/styles/theme';
 
-interface ButtonStyleProps {
-  variant: string;
-}
 export const ButtonWrapper = styled.button<ButtonStyleProps>`
   height: 40px;
+  width: 100%;
   display: flex;
   cursor: pointer;
   font-weight: 400;
@@ -26,7 +24,7 @@ export const ButtonWrapper = styled.button<ButtonStyleProps>`
         background: ${theme.colors.gray_300};
       }
       &:focus {
-        box-shadow: 0 0 0 2px ${theme.colors.gray_200};
+        box-shadow: 0 0 0 2px ${theme.colors.focus};
         outline: 0;
       }
       &:active {
@@ -48,7 +46,7 @@ export const ButtonWrapper = styled.button<ButtonStyleProps>`
         border-color: ${theme.colors.gray_300};
       }
       &:focus {
-        box-shadow: 0 0 0 2px ${theme.colors.gray_200};
+        box-shadow: 0 0 0 2px ${theme.colors.focus};
         outline: 0;
       }
       &:active {
@@ -56,7 +54,6 @@ export const ButtonWrapper = styled.button<ButtonStyleProps>`
         border-color: ${theme.colors.gray_500};
       }
     `}
-
     ${(props) =>
     props.variant === 'text' &&
     css`
@@ -67,12 +64,18 @@ export const ButtonWrapper = styled.button<ButtonStyleProps>`
         background-color: ${theme.colors.hover};
       }
       &:focus {
-        box-shadow: 0 0 0 2px ${theme.colors.gray_100};
+        box-shadow: 0 0 0 2px ${theme.colors.focus};
         outline: 0;
       }
       &:active {
         color: ${theme.colors.primary};
         background-color: ${theme.colors.gray_100};
       }
+    `}
+    ${(props) =>
+    props.variant === 'link' &&
+    css`
+      height: 0px;
+      padding: 0px;
     `}
 `;

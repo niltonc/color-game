@@ -1,6 +1,9 @@
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
-  variant?: 'primary' | 'outline' | 'text';
+  variant?: 'primary' | 'outline' | 'text' | 'link';
+}
+interface ButtonStyleProps {
+  variant: string;
 }
 interface ButtonGruopProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -42,10 +45,12 @@ interface ScoreBoardStyleProps {
   binline?: boolean;
 }
 interface GlobalData {
-  highScore: number;
-  setHighScore: (payload: number) => void;
-  clearHighScore: () => void;
   isStart: boolean;
+  highScore: number;
+  playerScore: number;
+  clearHighScore: () => void;
+  clearPlayerScore: () => void;
+  setHighScore: (payload: number) => void;
   setIsStart: (payload: boolean) => void;
 }
 
@@ -58,3 +63,15 @@ type HistoryScoreProps = {
   errorColor: string;
   timeToSelect: number;
 };
+
+interface ModalStyleProps {
+  size?: number;
+  bold?: boolean;
+  color?: string;
+}
+interface ModalProps {
+  open?: boolean;
+  onSave?: () => void;
+  onClose?: () => void;
+  playerScore: string;
+}
