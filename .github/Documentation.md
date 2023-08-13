@@ -1,62 +1,6 @@
 # PROJECT DOCUMENTATION
 
-![image](./project.png)
-
-### Estrutura de diretorios
-
-```shell
-├── .github
-├── public
-├   ├── next.svg
-├   ├── thirteen.svg
-├   ├── vercel. svg
-├── src
-├   ├── @types
-├   ├   ├── types.d.ts
-├   ├── api
-├   ├   ├── index.ts
-├   ├── app
-├   ├   ├── favicon.ico
-├   ├   ├── layout.tsx
-├   ├   ├── page.tsx
-├   ├   ├── registry.tsx
-├   ├── assets
-├   ├   ├── crown-alt.svg
-├   ├   ├── heart-half-vertical.svg
-├   ├   ├── skull.svg
-├   ├── components
-├   ├   ├── Button
-├   ├   ├── ButtonGroup
-├   ├   ├── ScoreBoard
-├   ├   ├── ScoreHistory
-├   ├   ├── ScrollSection
-├   ├   ├── Sidebar
-├   ├   ├── SquareGameColor
-├   ├   ├── Title
-├   ├── store
-├   ├   ├── useGlobalSotre
-├   ├   ├── usePersistedHighScore
-├   ├── styles
-├   ├   ├── theme
-├       ├   ├── index.ts
-├   ├   ├── global.ts
-├   ├── utils
-├   ├   ├── constants
-├   ├   ├── randomColorOptionsGenerator
-├   ├   ├── storage
-├   ├   ├── timer
-├── .eslintrc.json
-├── .gitignore
-├── .prettierignore
-├── .prettierrc
-├── LICENSE
-├── next.config.js
-├── package-lock.json
-├── package.json
-├── README.md
-├── tsconfig.json
-├── yarn.lock
-```
+![image](./initialscreen.png)
 
 ### Porque das tecnologias?
 
@@ -78,7 +22,7 @@ Zustand é uma solução de gestão de estados pequenos, rápida e escalonável.
 - Não envolve a aplicação em um provedor, como normalmente é feito no Redux.
 - Re-renderiza os componentes apenas quando houver mudanças.
 
-### Dificuldades da aplicação
+### Aplicação
 
 #### EASY MODE
 
@@ -91,3 +35,13 @@ Zustand é uma solução de gestão de estados pequenos, rápida e escalonável.
 #### HARD MODE
 
 ![image](./hardmode.png)
+
+#### MODAL
+
+![image](./modal.png)
+
+#### PLAYER SCORE
+
+![image](./playerscore.png)
+
+- A lista se organiza pela pontuação

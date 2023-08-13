@@ -1,6 +1,6 @@
 # GUESS THE COLOR
 
-![image](./.github/project.png)
+![image](./.github/initial.gif)
 
 ### Como o jogo funciona?
 
