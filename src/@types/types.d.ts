@@ -46,12 +46,19 @@ interface ScoreBoardStyleProps {
 }
 interface GlobalData {
   isStart: boolean;
-  highScore: number;
-  playerScore: number;
-  clearHighScore: () => void;
-  clearPlayerScore: () => void;
-  setHighScore: (payload: number) => void;
   setIsStart: (payload: boolean) => void;
+}
+
+interface highScoreData {
+  highScore: number;
+  clearHighScore: () => void;
+  setHighScore: (payload: number) => void;
+}
+
+interface playerScoreData {
+  playerScore: number;
+  clearPlayerScore: () => void;
+  setPlayerScore: (payload: number) => void;
 }
 
 type DifficultModes = {
@@ -73,5 +80,5 @@ interface ModalProps {
   open?: boolean;
   onSave?: () => void;
   onClose?: () => void;
-  playerScore: string;
+  playerScore: number;
 }

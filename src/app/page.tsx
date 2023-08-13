@@ -22,10 +22,11 @@ import {
 } from '@/utils/constants';
 import { randomColorOptionsGenerator } from '@/utils/randomColorOptionsGenerator';
 import { startTimer } from '@/utils/timer';
+// import Modal from '@/components/Modal';
 
 export default function Home() {
-  const { highScore, isStart, setIsStart } = useGlobalStore((state) => state);
-  const { setHighScore, clearHighScore } = usePersistedHighScore();
+  const { isStart, setIsStart } = useGlobalStore((state) => state);
+  const { highScore, setHighScore, clearHighScore } = usePersistedHighScore();
 
   const [time, setTime] = useState(30);
   const [score, setScore] = useState(0);
@@ -93,6 +94,7 @@ export default function Home() {
           setTime(time - 1);
         } else {
           stopGame();
+          // handleOpenModal();
         }
       }, 1000);
 
@@ -117,6 +119,18 @@ export default function Home() {
     stopGame();
     clearHighScore();
   };
+
+  //
+  // const [modalOpen, setModalOpen] = useState(false);
+
+  // const handleOpenModal = () => {
+  //   setModalOpen(true);
+  // };
+
+  // const handleCloseModal = () => {
+  //   setModalOpen(false);
+  // };
+  //
 
   return (
     <AppContainer>
@@ -180,7 +194,21 @@ export default function Home() {
           )}
         </div>
       </MainContent>
-      <Button onClick={() => handleResetAll()}>Reset All</Button>
+      <div
+        style={{
+          bottom: 10,
+          right: 10,
+          position: 'absolute'
+        }}
+      >
+        <Button onClick={() => handleResetAll()} variant="text">
+          Reset All
+        </Button>
+      </div>
+      {/* <div>
+        <button onClick={() => handleOpenModal()}>CHAMA MODAL</button>
+        <Modal open={modalOpen} onClose={handleCloseModal} playerScore={200} />
+      </div> */}
     </AppContainer>
   );
 }
