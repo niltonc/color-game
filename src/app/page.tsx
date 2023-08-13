@@ -22,14 +22,17 @@ import {
 } from '@/utils/constants';
 import { randomColorOptionsGenerator } from '@/utils/randomColorOptionsGenerator';
 import { startTimer } from '@/utils/timer';
-// import Modal from '@/components/Modal';
+import Modal from '@/components/Modal';
 
 export default function Home() {
-  const { isStart, setIsStart } = useGlobalStore((state) => state);
+  const { isStart, score, setIsStart, setScore } = useGlobalStore(
+    (state) => state
+  );
   const { highScore, setHighScore, clearHighScore } = usePersistedHighScore();
 
   const [time, setTime] = useState(30);
-  const [score, setScore] = useState(0);
+  const [playerScore, setPlayerScore] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
   const [colors, setColors] = useState<string[]>([]);
   const [historyScore, setHistoryScore] = useState<HistoryScoreProps[]>([]);
   const [difficultyLevel, setDifficultyLevel] = useState<string>('easy');
@@ -59,6 +62,7 @@ export default function Home() {
     setScore(0);
     setHistoryScore([]);
     setIsStart(false);
+    setPlayerScore(score);
   };
   const handleColorSelectedOption = (color: string, successColor: string) => {
     setHistoryScore([
@@ -94,7 +98,7 @@ export default function Home() {
           setTime(time - 1);
         } else {
           stopGame();
-          // handleOpenModal();
+          handleOpenModal();
         }
       }, 1000);
 
@@ -120,17 +124,13 @@ export default function Home() {
     clearHighScore();
   };
 
-  //
-  // const [modalOpen, setModalOpen] = useState(false);
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
 
-  // const handleOpenModal = () => {
-  //   setModalOpen(true);
-  // };
-
-  // const handleCloseModal = () => {
-  //   setModalOpen(false);
-  // };
-  //
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
 
   return (
     <AppContainer>
@@ -205,10 +205,14 @@ export default function Home() {
           Reset All
         </Button>
       </div>
-      {/* <div>
+      <div>
         <button onClick={() => handleOpenModal()}>CHAMA MODAL</button>
-        <Modal open={modalOpen} onClose={handleCloseModal} playerScore={200} />
-      </div> */}
+        <Modal
+          open={modalOpen}
+          onClose={handleCloseModal}
+          score={playerScore}
+        />
+      </div>
     </AppContainer>
   );
 }

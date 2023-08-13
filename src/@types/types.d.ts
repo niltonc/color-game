@@ -44,10 +44,6 @@ interface ChildrenProp {
 interface ScoreBoardStyleProps {
   binline?: boolean;
 }
-interface GlobalData {
-  isStart: boolean;
-  setIsStart: (payload: boolean) => void;
-}
 
 interface HighScoreData {
   highScore: number;
@@ -61,6 +57,12 @@ interface PlayerData {
     payload: Array<{ playerName: string; score: number }>
   ) => void;
   clearPlayerScores: () => void;
+}
+interface GlobalData {
+  isStart: boolean;
+  score: number;
+  setIsStart: (payload: boolean) => void;
+  setScore: (payload: number) => void;
 }
 
 type DifficultModes = {
