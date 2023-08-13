@@ -22,15 +22,15 @@ import {
 } from '@/utils/constants';
 import { randomColorOptionsGenerator } from '@/utils/randomColorOptionsGenerator';
 import { startTimer } from '@/utils/timer';
-import Modal from '@/app/Modal';
 import { usePersistedPlayerData } from '@/store/usePersistedPlayerScore';
+import Modal from './Modal';
 
 export default function Home() {
   const { isStart, score, setIsStart, setScore } = useGlobalStore(
     (state) => state
   );
   const { highScore, setHighScore, clearHighScore } = usePersistedHighScore();
-  const { clearPlayerScores } = usePersistedPlayerData();
+  const { playerScores, clearPlayerScores } = usePersistedPlayerData();
   const [time, setTime] = useState(30);
   const [playerScore, setPlayerScore] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
@@ -61,7 +61,6 @@ export default function Home() {
     setCorrectColor(generateRandomHexdecimalColor());
     setColors([]);
     setScore(0);
-    setHistoryScore([]);
     setIsStart(false);
     setPlayerScore(score);
   };
@@ -99,7 +98,7 @@ export default function Home() {
           setTime(time - 1);
         } else {
           stopGame();
-          handleOpenModal();
+          setModalOpen(true);
         }
       }, 1000);
 
@@ -122,16 +121,9 @@ export default function Home() {
 
   const handleResetAll = () => {
     stopGame();
+    setHistoryScore([]);
     clearHighScore();
     clearPlayerScores();
-  };
-
-  const handleOpenModal = () => {
-    setModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setModalOpen(false);
   };
 
   return (
@@ -207,8 +199,13 @@ export default function Home() {
           Reset All
         </Button>
       </div>
-
-      <Modal open={modalOpen} onClose={handleCloseModal} score={playerScore} />
+      <div>
+        <Modal
+          open={modalOpen}
+          onClose={() => setModalOpen(false)}
+          score={playerScore}
+        />
+      </div>
     </AppContainer>
   );
 }

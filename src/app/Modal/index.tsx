@@ -1,22 +1,14 @@
 import Image from 'next/image';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import Button from '@/components/Button';
 import TextField from '@/components/TextField';
 import CloseIcon from '@/assets/Close_round.svg';
-import { useOutsideClick } from '@/hook/useOutsideClick';
 import { Container, ModalContent, ModalOverlay, Span } from './styles';
 import { usePersistedPlayerData } from '@/store/usePersistedPlayerScore';
 
 const Modal: React.FC<ModalProps> = ({ open, onClose, score }) => {
-  const ref = useRef<any>(null);
   const [playerName, setPlayerName] = useState('');
   const { playerScores, setPlayerScores } = usePersistedPlayerData();
-
-  const handleClickOutside = () => {
-    if (onClose) {
-      onClose();
-    }
-  };
 
   const handleSaveClick = () => {
     if (playerName && score) {
@@ -29,13 +21,11 @@ const Modal: React.FC<ModalProps> = ({ open, onClose, score }) => {
     }
   };
 
-  useOutsideClick(ref, handleClickOutside);
-
   if (!open) return null;
 
   return (
     <ModalOverlay>
-      <ModalContent ref={ref}>
+      <ModalContent>
         <div
           style={{
             position: 'absolute',

@@ -2,8 +2,15 @@ import { create } from 'zustand';
 import { useEffect } from 'react';
 import { getValue, saveValue } from '@/utils/storage';
 
+const getInitialPlayerScores = () => {
+  const initialStoredPlayerScores = getValue('playerScores');
+  return initialStoredPlayerScores !== null
+    ? JSON.parse(initialStoredPlayerScores)
+    : [];
+};
+
 const usePlayerStore = create<PlayerData>((set) => ({
-  playerScores: [],
+  playerScores: getInitialPlayerScores(),
   setPlayerScores: (payload) => {
     set({ playerScores: payload });
   },
@@ -17,12 +24,12 @@ export { usePlayerStore };
 const usePersistedPlayerData = () => {
   const { playerScores, setPlayerScores, clearPlayerScores } = usePlayerStore();
 
-  useEffect(() => {
-    const initialStoredHighScores = getValue('playerScores');
-    if (initialStoredHighScores !== null) {
-      setPlayerScores(JSON.parse(initialStoredHighScores));
-    }
-  }, [setPlayerScores]);
+  // useEffect(() => {
+  //   const initialStoredHighScores = getValue('playerScores');
+  //   if (initialStoredHighScores !== null) {
+  //     setPlayerScores(JSON.parse(initialStoredHighScores));
+  //   }
+  // }, [setPlayerScores]);
 
   useEffect(() => {
     saveValue('playerScores', JSON.stringify(playerScores));
