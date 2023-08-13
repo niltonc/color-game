@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import theme from '@/styles/theme';
+import { getLuminance } from '@/utils/constants';
 
 export const ColorResultContainer = styled.div`
   flex: 1;
@@ -18,15 +19,9 @@ export const Rectangle = styled.div<ColorResultStyleProps>`
   justify-content: center;
   box-shadow: ${theme.box.shadow};
   background-color: ${(props) => props.color};
+  background-color: ${(props) => props.color};
   color: ${(props) => {
-    const getLuminance = (hexColor: any) => {
-      const r = parseInt(hexColor.slice(1, 3), 16);
-      const g = parseInt(hexColor.slice(3, 5), 16);
-      const b = parseInt(hexColor.slice(5, 7), 16);
-      return (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-    };
-
-    const backgroundLuminance = getLuminance(props.color);
+    const backgroundLuminance = getLuminance(`${props.color}`);
 
     return backgroundLuminance > 0.5
       ? `${theme.colors.primary}`

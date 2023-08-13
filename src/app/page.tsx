@@ -1,14 +1,14 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Title from '@/components/Title';
-import Button from '@/components/button';
+import Button from '@/components/Button';
 import Sidebar from '@/components/Sidebar';
 import ScoreBoard from '@/components/ScoreBoard';
 import ScoreHistory from '@/components/ScoreHistory';
 import { ButtonGroup } from '@/components/ButtonGroup';
 import ScrollSection from '@/components/ScrollSection';
 import SquareGameColor from '@/components/SquareGameColor';
-import Modal from '@/app/Modal';
+import Modal from '@/helper/Modal';
 import { useGlobalStore } from '@/store/useGlobalStore';
 import { usePersistedHighScore } from '@/store/usePersistedHighScore';
 import { usePersistedPlayerData } from '@/store/usePersistedPlayerScore';

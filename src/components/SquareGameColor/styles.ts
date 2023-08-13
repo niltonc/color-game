@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import theme from '@/styles/theme';
 
 export const SquareContainer = styled.div`
