@@ -3,6 +3,7 @@ import theme from '@/styles/theme';
 
 export const SidebarContainer = styled.div`
   width: 250px;
+  height: 100vh;
   color: ${theme.colors.primary};
   box-shadow: ${theme.box.shadow};
   background-color: ${theme.colors.gray_50};
@@ -18,9 +19,16 @@ export const ScoreContainer = styled.div`
 export const Text = styled.span`
   font-size: 15px;
 `;
-export const TitleContainer = styled.div`
-  margin-top: 20px;
+export const Title = styled.div`
+  display: flex;
   font-weight: bold;
-  font-size: 1.19rem;
-  padding-inline: 20px;
+  width: 550px;
+  font-size: 12px;
+  justify-content: center;
+`;
+export const TabContainer = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  margin-block: 20px;
 `;
