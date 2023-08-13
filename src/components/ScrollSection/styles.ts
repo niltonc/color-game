@@ -2,7 +2,7 @@ import theme from '@/styles/theme';
 import styled from 'styled-components';
 
 export const SectionWrapper = styled.section`
-  height: 570px;
+  height: 550px;
 `;
 export const ScrollableContent = styled.div`
   height: 100%;
