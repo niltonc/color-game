@@ -1,9 +1,15 @@
 import { create } from 'zustand';
 import { useEffect } from 'react';
-import { getValue, saveValue } from '@/utils/storage';
 
 const getInitialPlayerScores = () => {
-  const initialStoredPlayerScores = getValue('playerScores');
+  let initialStoredPlayerScores = null;
+
+  try {
+    initialStoredPlayerScores = localStorage.getItem('playerScores');
+  } catch (error) {
+    console.error('Error accessing localStorage:', error);
+  }
+
   return initialStoredPlayerScores !== null
     ? JSON.parse(initialStoredPlayerScores)
     : [];
@@ -25,14 +31,14 @@ const usePersistedPlayerData = () => {
   const { playerScores, setPlayerScores, clearPlayerScores } = usePlayerStore();
 
   // useEffect(() => {
-  //   const initialStoredHighScores = getValue('playerScores');
-  //   if (initialStoredHighScores !== null) {
-  //     setPlayerScores(JSON.parse(initialStoredHighScores));
+  //   const initialStoredPlayerScores = window.localStorage.getItem('playerScores');
+  //   if (initialStoredPlayerScores !== null) {
+  //     setPlayerScores(JSON.parse(initialStoredPlayerScores));
   //   }
   // }, [setPlayerScores]);
 
   useEffect(() => {
-    saveValue('playerScores', JSON.stringify(playerScores));
+    window.localStorage.setItem('playerScores', JSON.stringify(playerScores));
   }, [playerScores]);
 
   return { playerScores, setPlayerScores, clearPlayerScores };
