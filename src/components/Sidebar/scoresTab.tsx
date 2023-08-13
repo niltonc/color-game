@@ -1,12 +1,6 @@
 import React from 'react';
-import {
-  ScoreContainer,
-  SidebarContainer,
-  TabContainer,
-  Text,
-  Title
-} from './styles';
-import Button from '../Button';
+import { ScoreContainer, TabContainer, Title } from './styles';
+import Button from '@/components/Button';
 import Image from 'next/image';
 import Right from '@/assets/Expand_right.svg';
 import Left from '@/assets/Expand_left.svg';

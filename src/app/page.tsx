@@ -1,29 +1,25 @@
 'use client';
-
 import React, { useEffect, useState } from 'react';
-
-import Button from '@/components/Button';
 import Title from '@/components/Title';
+import Button from '@/components/Button';
 import Sidebar from '@/components/Sidebar';
 import ScoreBoard from '@/components/ScoreBoard';
 import ScoreHistory from '@/components/ScoreHistory';
 import { ButtonGroup } from '@/components/ButtonGroup';
 import ScrollSection from '@/components/ScrollSection';
 import SquareGameColor from '@/components/SquareGameColor';
-
+import Modal from '@/app/Modal';
 import { useGlobalStore } from '@/store/useGlobalStore';
 import { usePersistedHighScore } from '@/store/usePersistedHighScore';
-
-import { AppContainer, MainContent } from '@/styles/global';
+import { usePersistedPlayerData } from '@/store/usePersistedPlayerScore';
+import { randomColorOptionsGenerator } from '@/utils/randomColorOptionsGenerator';
+import { startTimer } from '@/utils/timer';
 import {
   difficultMode,
   generateRandomHexdecimalColor,
   progress
 } from '@/utils/constants';
-import { randomColorOptionsGenerator } from '@/utils/randomColorOptionsGenerator';
-import { startTimer } from '@/utils/timer';
-import { usePersistedPlayerData } from '@/store/usePersistedPlayerScore';
-import Modal from './Modal';
+import { AppContainer, MainContent } from '@/styles/global';
 
 export default function Home() {
   const { isStart, score, setIsStart, setScore } = useGlobalStore(
@@ -31,7 +27,9 @@ export default function Home() {
   );
   const { highScore, setHighScore, clearHighScore } = usePersistedHighScore();
   const { playerScores, clearPlayerScores } = usePersistedPlayerData();
-  const order = playerScores.sort((a, b) => b.score - a.score);
+
+  const orderPlayScores = playerScores.sort((a, b) => b.score - a.score);
+
   const [time, setTime] = useState(30);
   const [playerScore, setPlayerScore] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
@@ -155,10 +153,10 @@ export default function Home() {
           {tab && (
             <div>
               <ul>
-                {order.map((player, index) => (
-                  <li key={index}>
+                {orderPlayScores.map((player, index) => (
+                  <div key={index}>
                     {player.playerName} - {player.score} pontos
-                  </li>
+                  </div>
                 ))}
               </ul>
             </div>
