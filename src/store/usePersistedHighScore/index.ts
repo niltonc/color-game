@@ -1,13 +1,20 @@
-import React, { useEffect } from 'react';
-import { useGlobalStore } from '../useGlobalStore';
+import { create } from 'zustand';
+import { useEffect } from 'react';
 import { getValue, saveValue } from '@/utils/storage';
+const useHighScore = create<highScoreData>((set) => ({
+  highScore: 0,
+  setHighScore: (payload: number) => {
+    set({ highScore: payload });
+  },
+  clearHighScore: () => {
+    set({ highScore: 0 });
+  }
+}));
+
+export { useHighScore };
 
 const usePersistedHighScore = () => {
-  const {
-    highScore: updateHighScore,
-    setHighScore,
-    clearHighScore
-  } = useGlobalStore();
+  const { highScore, setHighScore, clearHighScore } = useHighScore();
 
   useEffect(() => {
     const initialStoredHighScore = getValue('highScore');
@@ -17,10 +24,10 @@ const usePersistedHighScore = () => {
   }, [setHighScore]);
 
   useEffect(() => {
-    saveValue('highScore', updateHighScore.toString());
-  }, [updateHighScore]);
+    saveValue('highScore', highScore.toString());
+  }, [highScore]);
 
-  return { updateHighScore, setHighScore, clearHighScore };
+  return { highScore, setHighScore, clearHighScore };
 };
 
 export { usePersistedHighScore };
