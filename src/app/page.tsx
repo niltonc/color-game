@@ -19,7 +19,12 @@ import {
   generateRandomHexdecimalColor,
   progress
 } from '@/utils/constants';
-import { AppContainer, MainContent } from '@/styles/global';
+import {
+  AppContainer,
+  MainContent,
+  PlayerScoreContainer,
+  Span
+} from '@/styles/global';
 
 export default function Home() {
   const { isStart, score, setIsStart, setScore } = useGlobalStore(
@@ -152,13 +157,12 @@ export default function Home() {
           )}
           {tab && (
             <div>
-              <ul>
-                {orderPlayScores.map((player, index) => (
-                  <div key={index}>
-                    {player.playerName} - {player.score} pontos
-                  </div>
-                ))}
-              </ul>
+              {orderPlayScores.map((player, index) => (
+                <PlayerScoreContainer key={index}>
+                  <Span>{player.playerName}</Span>
+                  <Span>{player.score} Points</Span>
+                </PlayerScoreContainer>
+              ))}
             </div>
           )}
         </ScrollSection>

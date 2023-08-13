@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components';
+import theme from './theme';
 
 const GlobalStyles = createGlobalStyle`
   * {
@@ -26,4 +27,22 @@ export const MainContent = styled.div`
   align-items: center;
   flex-direction: column;
   margin-top: 25px;
+`;
+
+export const PlayerScoreContainer = styled.div`
+  gap: 10px;
+  padding: 5px 20px;
+  display: flex;
+  flex: 1;
+  justify-content: space-around;
+  border-bottom: 1px solid #ccc6;
+`;
+export const Span = styled.div`
+  color: ${theme.colors.primary};
+  width: 100%;
+  font-size: 16px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
