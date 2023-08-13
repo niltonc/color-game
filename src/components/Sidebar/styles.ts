@@ -13,7 +13,7 @@ export const ScoreContainer = styled.div`
   margin-top: 10px;
   align-items: center;
   padding-inline: 20px;
-  border-top: 2px solid ${theme.colors.border};
+  border-block: 2px solid ${theme.colors.border};
 `;
 export const Text = styled.span`
   font-size: 15px;
