@@ -1,18 +1,22 @@
 import Image from 'next/image';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import Button from '@/components/Button';
 import TextField from '@/components/TextField';
 import CloseIcon from '@/assets/Close_round.svg';
 import { useOutsideClick } from '@/hook/useOutsideClick';
 import { Container, ModalContent, ModalOverlay, Span } from './styles';
+import { usePersistedPlayerData } from '@/store/usePersistedPlayerScore';
 
-const Modal: React.FC<ModalProps> = ({
-  open,
-  onClose,
-  onSave,
-  playerScore
-}) => {
-  if (!open) return null;
+const Modal: React.FC<ModalProps> = ({ open, onClose, onSave }) => {
+  const { playerScore, playerNames, setPlayerNames } = usePersistedPlayerData();
+  const [newPlayerName, setNewPlayerName] = useState('');
+
+  const handleAddPlayer = () => {
+    if (newPlayerName.trim() !== '') {
+      setPlayerNames([...playerNames, newPlayerName]);
+      setNewPlayerName('');
+    }
+  };
 
   const ref = useRef<any>(null);
 
@@ -23,6 +27,8 @@ const Modal: React.FC<ModalProps> = ({
   };
 
   useOutsideClick(ref, handleClickOutside);
+
+  if (!open) return null;
 
   return (
     <ModalOverlay>
@@ -48,13 +54,18 @@ const Modal: React.FC<ModalProps> = ({
           </Container>
 
           <Span>Do you want to save your score?</Span>
-          <TextField placeholder="Insert your name here" />
+          <TextField
+            placeholder="Insert your name here"
+            type="text"
+            value={newPlayerName}
+            onChange={(e) => setNewPlayerName(e.target.value)}
+          />
 
           <div style={{ display: 'flex', gap: 10 }}>
             <Button onClick={onClose} variant="outline">
               Cancel
             </Button>
-            <Button onClick={onSave}>Save</Button>
+            <Button onClick={() => handleAddPlayer}>Save</Button>
           </div>
         </div>
       </ModalContent>

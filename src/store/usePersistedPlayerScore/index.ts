@@ -1,33 +1,65 @@
 import { create } from 'zustand';
 import { useEffect } from 'react';
 import { getValue, saveValue } from '@/utils/storage';
-const usePlayerScore = create<playerScoreData>((set) => ({
+
+interface PlayerScoreData {
+  playerScore: number;
+  playerNames: string[];
+  clearPlayerScore: () => void;
+  setPlayerScore: (payload: number) => void;
+  setPlayerNames: (payload: string[]) => void;
+}
+
+const usePlayerData = create<PlayerScoreData>((set) => ({
   playerScore: 0,
+  playerNames: [],
   setPlayerScore: (payload: number) => {
     set({ playerScore: payload });
+  },
+  setPlayerNames: (payload: string[]) => {
+    set({ playerNames: payload });
   },
   clearPlayerScore: () => {
     set({ playerScore: 0 });
   }
 }));
 
-export { usePlayerScore };
+export { usePlayerData };
 
-const usePersistedHighScore = () => {
-  const { playerScore, setPlayerScore, clearPlayerScore } = usePlayerScore();
+const usePersistedPlayerData = () => {
+  const {
+    playerScore,
+    playerNames,
+    setPlayerScore,
+    setPlayerNames,
+    clearPlayerScore
+  } = usePlayerData();
 
   useEffect(() => {
-    const initialStoredHighScore = getValue('playerScore');
-    if (initialStoredHighScore !== null) {
-      setPlayerScore(Number(initialStoredHighScore));
+    const initialStoredPlayerScore = getValue('playerScore');
+    const initialStoredPlayerNames = getValue('playerNames');
+
+    if (initialStoredPlayerScore !== null) {
+      setPlayerScore(Number(initialStoredPlayerScore));
     }
-  }, [setPlayerScore]);
+
+    if (initialStoredPlayerNames !== null) {
+      setPlayerNames(JSON.parse(initialStoredPlayerNames));
+    }
+  }, [setPlayerScore, setPlayerNames]);
 
   useEffect(() => {
     saveValue('playerScore', playerScore.toString());
-  }, [playerScore]);
+    saveValue('playerNames', JSON.stringify(playerNames));
+  }, [playerScore, playerNames]);
 
-  return { playerScore, setPlayerScore, clearPlayerScore };
+  return {
+    playerScore,
+    playerNames,
+    setPlayerScore,
+    setPlayerNames,
+    clearPlayerScore
+  };
 };
 
-export { usePersistedHighScore };
+export { usePersistedPlayerData };

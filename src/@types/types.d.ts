@@ -49,16 +49,10 @@ interface GlobalData {
   setIsStart: (payload: boolean) => void;
 }
 
-interface highScoreData {
+interface HighScoreData {
   highScore: number;
   clearHighScore: () => void;
   setHighScore: (payload: number) => void;
-}
-
-interface playerScoreData {
-  playerScore: number;
-  clearPlayerScore: () => void;
-  setPlayerScore: (payload: number) => void;
 }
 
 type DifficultModes = {
@@ -80,5 +74,4 @@ interface ModalProps {
   open?: boolean;
   onSave?: () => void;
   onClose?: () => void;
-  playerScore: number;
 }
