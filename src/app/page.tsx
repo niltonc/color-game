@@ -22,14 +22,15 @@ import {
 } from '@/utils/constants';
 import { randomColorOptionsGenerator } from '@/utils/randomColorOptionsGenerator';
 import { startTimer } from '@/utils/timer';
-import Modal from '@/components/Modal';
+import Modal from '@/app/Modal';
+import { usePersistedPlayerData } from '@/store/usePersistedPlayerScore';
 
 export default function Home() {
   const { isStart, score, setIsStart, setScore } = useGlobalStore(
     (state) => state
   );
   const { highScore, setHighScore, clearHighScore } = usePersistedHighScore();
-
+  const { clearPlayerScores } = usePersistedPlayerData();
   const [time, setTime] = useState(30);
   const [playerScore, setPlayerScore] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
@@ -122,6 +123,7 @@ export default function Home() {
   const handleResetAll = () => {
     stopGame();
     clearHighScore();
+    clearPlayerScores();
   };
 
   const handleOpenModal = () => {
@@ -205,14 +207,8 @@ export default function Home() {
           Reset All
         </Button>
       </div>
-      <div>
-        <button onClick={() => handleOpenModal()}>CHAMA MODAL</button>
-        <Modal
-          open={modalOpen}
-          onClose={handleCloseModal}
-          score={playerScore}
-        />
-      </div>
+
+      <Modal open={modalOpen} onClose={handleCloseModal} score={playerScore} />
     </AppContainer>
   );
 }

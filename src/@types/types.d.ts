@@ -80,3 +80,14 @@ interface ModalStyleProps {
   bold?: boolean;
   color?: string;
 }
+
+interface ModalProps {
+  open?: boolean;
+  onClose?: () => void;
+  score?: number;
+}
+
+type PlayerScore = {
+  playerName: string;
+  score: number;
+};
