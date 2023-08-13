@@ -31,9 +31,11 @@ export default function Home() {
   );
   const { highScore, setHighScore, clearHighScore } = usePersistedHighScore();
   const { playerScores, clearPlayerScores } = usePersistedPlayerData();
+  const order = playerScores.sort((a, b) => b.score - a.score);
   const [time, setTime] = useState(30);
   const [playerScore, setPlayerScore] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
+  const [tab, setTab] = useState(false);
   const [colors, setColors] = useState<string[]>([]);
   const [historyScore, setHistoryScore] = useState<HistoryScoreProps[]>([]);
   const [difficultyLevel, setDifficultyLevel] = useState<string>('easy');
@@ -128,24 +130,39 @@ export default function Home() {
 
   return (
     <AppContainer>
-      <Sidebar>
+      <Sidebar tab={tab} onClick={() => setTab(!tab)}>
         <ScrollSection>
-          <div style={{ paddingInline: 20 }}>
-            {historyScore
-              .map((item, index) => (
-                <ScoreHistory
-                  key={index}
-                  successLabel={item.successColor}
-                  errorLabel={item.errorColor}
-                  type={
-                    item.successColor === item.errorColor ? 'success' : 'error'
-                  }
-                  time={item.timeToSelect}
-                  color={item.errorColor}
-                />
-              ))
-              .reverse()}
-          </div>
+          {!tab && (
+            <div style={{ paddingInline: 20 }}>
+              {historyScore
+                .map((item, index) => (
+                  <ScoreHistory
+                    key={index}
+                    successLabel={item.successColor}
+                    errorLabel={item.errorColor}
+                    type={
+                      item.successColor === item.errorColor
+                        ? 'success'
+                        : 'error'
+                    }
+                    time={item.timeToSelect}
+                    color={item.errorColor}
+                  />
+                ))
+                .reverse()}
+            </div>
+          )}
+          {tab && (
+            <div>
+              <ul>
+                {order.map((player, index) => (
+                  <li key={index}>
+                    {player.playerName} - {player.score} pontos
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </ScrollSection>
       </Sidebar>
 
@@ -198,7 +215,10 @@ export default function Home() {
         <Button onClick={() => handleResetAll()} variant="text">
           Reset All
         </Button>
+
+        <></>
       </div>
+
       <div>
         <Modal
           open={modalOpen}
