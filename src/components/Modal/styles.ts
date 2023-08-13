@@ -23,7 +23,7 @@ export const ModalOverlay = styled.div`
 `;
 
 export const ModalContent = styled.div`
-  padding: 20px 30px;
+  padding: 30px 30px;
   background-color: #fff;
   border-radius: ${theme.border.radius};
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);

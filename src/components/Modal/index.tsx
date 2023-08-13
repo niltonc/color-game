@@ -30,7 +30,8 @@ const Modal: React.FC<ModalProps> = ({
         <div
           style={{
             position: 'absolute',
-            right: 10
+            right: 10,
+            top: 20
           }}
         >
           <Button onClick={onClose} variant="link">
