@@ -55,6 +55,14 @@ interface HighScoreData {
   setHighScore: (payload: number) => void;
 }
 
+interface PlayerData {
+  playerScores: Array<{ playerName: string; score: number }>;
+  setPlayerScores: (
+    payload: Array<{ playerName: string; score: number }>
+  ) => void;
+  clearPlayerScores: () => void;
+}
+
 type DifficultModes = {
   [key: string]: number;
 };
@@ -69,9 +77,4 @@ interface ModalStyleProps {
   size?: number;
   bold?: boolean;
   color?: string;
-}
-interface ModalProps {
-  open?: boolean;
-  onSave?: () => void;
-  onClose?: () => void;
 }

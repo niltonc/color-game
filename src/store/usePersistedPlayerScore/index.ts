@@ -2,64 +2,33 @@ import { create } from 'zustand';
 import { useEffect } from 'react';
 import { getValue, saveValue } from '@/utils/storage';
 
-interface PlayerScoreData {
-  playerScore: number;
-  playerNames: string[];
-  clearPlayerScore: () => void;
-  setPlayerScore: (payload: number) => void;
-  setPlayerNames: (payload: string[]) => void;
-}
-
-const usePlayerData = create<PlayerScoreData>((set) => ({
-  playerScore: 0,
-  playerNames: [],
-  setPlayerScore: (payload: number) => {
-    set({ playerScore: payload });
+const usePlayerStore = create<PlayerData>((set) => ({
+  playerScores: [],
+  setPlayerScores: (payload) => {
+    set({ playerScores: payload });
   },
-  setPlayerNames: (payload: string[]) => {
-    set({ playerNames: payload });
-  },
-  clearPlayerScore: () => {
-    set({ playerScore: 0 });
+  clearPlayerScores: () => {
+    set({ playerScores: [] });
   }
 }));
 
-export { usePlayerData };
+export { usePlayerStore };
 
 const usePersistedPlayerData = () => {
-  const {
-    playerScore,
-    playerNames,
-    setPlayerScore,
-    setPlayerNames,
-    clearPlayerScore
-  } = usePlayerData();
+  const { playerScores, setPlayerScores, clearPlayerScores } = usePlayerStore();
 
   useEffect(() => {
-    const initialStoredPlayerScore = getValue('playerScore');
-    const initialStoredPlayerNames = getValue('playerNames');
-
-    if (initialStoredPlayerScore !== null) {
-      setPlayerScore(Number(initialStoredPlayerScore));
+    const initialStoredHighScores = getValue('playerScores');
+    if (initialStoredHighScores !== null) {
+      setPlayerScores(JSON.parse(initialStoredHighScores));
     }
-
-    if (initialStoredPlayerNames !== null) {
-      setPlayerNames(JSON.parse(initialStoredPlayerNames));
-    }
-  }, [setPlayerScore, setPlayerNames]);
+  }, [setPlayerScores]);
 
   useEffect(() => {
-    saveValue('playerScore', playerScore.toString());
-    saveValue('playerNames', JSON.stringify(playerNames));
-  }, [playerScore, playerNames]);
+    saveValue('playerScores', JSON.stringify(playerScores));
+  }, [playerScores]);
 
-  return {
-    playerScore,
-    playerNames,
-    setPlayerScore,
-    setPlayerNames,
-    clearPlayerScore
-  };
+  return { playerScores, setPlayerScores, clearPlayerScores };
 };
 
 export { usePersistedPlayerData };
