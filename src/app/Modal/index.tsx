@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
-import Button from '@/components/Button';
+import Button from '@/components/button';
 import TextField from '@/components/TextField';
 import CloseIcon from '@/assets/Close_round.svg';
 import { Container, ModalContent, ModalOverlay, Span } from './styles';
