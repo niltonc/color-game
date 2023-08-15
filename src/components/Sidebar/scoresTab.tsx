@@ -1,5 +1,5 @@
 import React from 'react';
-import { Div, ScoreContainer, TabContainer, Text, Title } from './styles';
+import { ScoreContainer, TabContainer, Text, Title } from './styles';
 import Button from '@/components/Button';
 import Image from 'next/image';
 import Right from '@/assets/Expand_right.svg';

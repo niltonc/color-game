@@ -39,8 +39,7 @@ export default function Home() {
   );
   const { highScore, setHighScore, clearHighScore } = usePersistedHighScore();
   const { playerScores, clearPlayerScores } = usePersistedPlayerData();
-  const { historyScore, setHistoryScore, clearHistoryScore } =
-    usePersistedHistoryScore();
+  const { historyScore, setHistoryScore } = usePersistedHistoryScore();
 
   const orderPlayScores = playerScores.sort((a, b) => b.score - a.score);
 
