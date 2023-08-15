@@ -46,3 +46,7 @@ export const Div = styled.div`
 export const HistoryContainer = styled.div`
   padding-inline: 20px;
 `;
+
+export const Body = styled.body`
+  margin: 0;
+`;

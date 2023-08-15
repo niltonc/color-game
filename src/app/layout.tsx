@@ -1,12 +1,9 @@
 'use client';
-import styled, { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import StyledComponentsRegistry from './registry';
 import theme from '@/styles/theme';
 import GlobalStyles from '@/styles/global';
-
-const Body = styled.body`
-  margin: 0;
-`;
+import { Body } from '@/styles';
 
 export default function RootLayout({
   children
