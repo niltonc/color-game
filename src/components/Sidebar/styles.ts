@@ -33,4 +33,5 @@ export const TabContainer = styled.div`
   display: flex;
   align-items: center;
   margin-block: 20px;
+  padding-inline: 10px;
 `;

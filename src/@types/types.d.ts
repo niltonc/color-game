@@ -59,6 +59,12 @@ interface PlayerData {
   ) => void;
   clearPlayerScores: () => void;
 }
+
+interface historyData {
+  historyScore: HistoryScoreProps[];
+  setHistoryScore: (payload: HistoryScoreProps[]) => void;
+  clearHistoryScore: () => void;
+}
 interface GlobalData {
   isStart: boolean;
   score: number;

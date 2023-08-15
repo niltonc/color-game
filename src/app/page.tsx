@@ -24,7 +24,8 @@ import {
   MainContent,
   PlayerScoreContainer,
   Span
-} from '@/styles/global';
+} from '@/styles';
+import { usePersistedHistoryScore } from '@/store/usePersistedHistory';
 
 export default function Home() {
   const { isStart, score, setIsStart, setScore } = useGlobalStore(
@@ -32,6 +33,8 @@ export default function Home() {
   );
   const { highScore, setHighScore, clearHighScore } = usePersistedHighScore();
   const { playerScores, clearPlayerScores } = usePersistedPlayerData();
+  const { historyScore, setHistoryScore, clearHistoryScore } =
+    usePersistedHistoryScore();
 
   const orderPlayScores = playerScores.sort((a, b) => b.score - a.score);
 
@@ -40,7 +43,6 @@ export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
   const [tab, setTab] = useState(false);
   const [colors, setColors] = useState<string[]>([]);
-  const [historyScore, setHistoryScore] = useState<HistoryScoreProps[]>([]);
   const [difficultyLevel, setDifficultyLevel] = useState<string>('easy');
   const [correctColor, setCorrectColor] = useState<string>(
     generateRandomHexdecimalColor()
@@ -83,6 +85,8 @@ export default function Home() {
 
     const numberOfButtons = setDifficultyMode(difficultyLevel);
     randomColorOptionsGenerator(numberOfButtons, setCorrectColor, setColors);
+
+    setTab(false);
   };
 
   const getTimeColorForHistory = (time: number) => {
@@ -218,17 +222,13 @@ export default function Home() {
         <Button onClick={() => handleResetAll()} variant="text">
           Reset All
         </Button>
-
-        <></>
       </div>
 
-      <div>
-        <Modal
-          open={modalOpen}
-          onClose={() => setModalOpen(false)}
-          score={playerScore}
-        />
-      </div>
+      <Modal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        score={playerScore}
+      />
     </AppContainer>
   );
 }

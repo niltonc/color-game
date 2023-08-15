@@ -75,8 +75,10 @@ export const ButtonWrapper = styled.button<ButtonStyleProps>`
     ${(props) =>
     props.variant === 'link' &&
     css`
-      height: 0px;
+      height: 30px;
+      width: 30px;
       padding: 0px;
+      background: transparent;
       &:focus {
         box-shadow: 0 0 0 2px ${theme.colors.focus};
         outline: 0;
