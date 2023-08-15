@@ -9,14 +9,15 @@ export const SidebarContainer = styled.div`
   background-color: ${theme.colors.gray_50};
 `;
 export const ScoreContainer = styled.div`
-  padding: 5px;
-  display: flex;
   flex: 1;
   gap: 10px;
-  justify-content: space-between;
+  padding: 5px;
+  display: flex;
   align-items: center;
   padding-inline: 20px;
+  justify-content: space-between;
   border-block: 2px solid ${theme.colors.border};
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 `;
 export const Text = styled.span`
   font-size: 15px;
