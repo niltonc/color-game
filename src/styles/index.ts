@@ -15,19 +15,34 @@ export const MainContent = styled.div`
 `;
 
 export const PlayerScoreContainer = styled.div`
-  gap: 10px;
-  padding: 5px 20px;
-  display: flex;
   flex: 1;
-  justify-content: space-around;
+  gap: 10px;
+  display: flex;
+  padding: 10px 20px;
   border-bottom: 1px solid #ccc6;
+  justify-content: space-between;
 `;
 export const Span = styled.div`
-  color: ${theme.colors.primary};
   width: 100%;
+  text-align: end;
   font-size: 16px;
   font-weight: 500;
-  white-space: nowrap;
   overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
+  color: ${theme.colors.primary};
+`;
+export const ContainerReset = styled.div`
+  right: 10px;
+  bottom: 10px;
+  position: absolute;
+`;
+export const Div = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+`;
+
+export const HistoryContainer = styled.div`
+  padding-inline: 20px;
 `;

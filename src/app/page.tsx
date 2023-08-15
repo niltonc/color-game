@@ -1,5 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
+
+import Modal from '@/components/Modal';
 import Title from '@/components/Title';
 import Button from '@/components/Button';
 import Sidebar from '@/components/Sidebar';
@@ -8,12 +10,14 @@ import ScoreHistory from '@/components/ScoreHistory';
 import { ButtonGroup } from '@/components/ButtonGroup';
 import ScrollSection from '@/components/ScrollSection';
 import SquareGameColor from '@/components/SquareGameColor';
-import Modal from '@/components/Modal';
+
 import { useGlobalStore } from '@/store/useGlobalStore';
 import { usePersistedHighScore } from '@/store/usePersistedHighScore';
 import { usePersistedPlayerData } from '@/store/usePersistedPlayerScore';
-import { randomColorOptionsGenerator } from '@/utils/randomColorOptionsGenerator';
+import { usePersistedHistoryScore } from '@/store/usePersistedHistory';
+
 import { startTimer } from '@/utils/timer';
+import { randomColorOptionsGenerator } from '@/utils/randomColorOptionsGenerator';
 import {
   difficultMode,
   generateRandomHexdecimalColor,
@@ -21,11 +25,13 @@ import {
 } from '@/utils/constants';
 import {
   AppContainer,
+  ContainerReset,
   MainContent,
   PlayerScoreContainer,
-  Span
+  Span,
+  Div,
+  HistoryContainer
 } from '@/styles';
-import { usePersistedHistoryScore } from '@/store/usePersistedHistory';
 
 export default function Home() {
   const { isStart, score, setIsStart, setScore } = useGlobalStore(
@@ -70,6 +76,13 @@ export default function Home() {
     setScore(0);
     setIsStart(false);
     setPlayerScore(score);
+  };
+
+  const handleResetAll = () => {
+    stopGame();
+    setHistoryScore([]);
+    clearHighScore();
+    clearPlayerScores();
   };
   const handleColorSelectedOption = (color: string, successColor: string) => {
     setHistoryScore([
@@ -128,19 +141,12 @@ export default function Home() {
     }
   }, [isStart, time]);
 
-  const handleResetAll = () => {
-    stopGame();
-    setHistoryScore([]);
-    clearHighScore();
-    clearPlayerScores();
-  };
-
   return (
     <AppContainer>
       <Sidebar tab={tab} onClick={() => setTab(!tab)}>
         <ScrollSection>
           {!tab && (
-            <div style={{ paddingInline: 20 }}>
+            <HistoryContainer>
               {historyScore
                 .map((item, index) => (
                   <ScoreHistory
@@ -157,72 +163,62 @@ export default function Home() {
                   />
                 ))
                 .reverse()}
-            </div>
+            </HistoryContainer>
           )}
           {tab && (
-            <div>
+            <>
               {orderPlayScores.map((player, index) => (
                 <PlayerScoreContainer key={index}>
                   <Span>{player.playerName}</Span>
                   <Span>{player.score} Points</Span>
                 </PlayerScoreContainer>
               ))}
-            </div>
+            </>
           )}
         </ScrollSection>
       </Sidebar>
 
       <MainContent>
-        <div>
+        <Div>
           <Title />
-          <div style={{ paddingBlock: 15 }}>
-            <ScoreBoard
-              score={score}
-              highScore={highScore}
-              time={time}
-              onReset={stopGame}
-              disabled={!isStart}
-            />
-          </div>
-          <div style={{ width: 450, background: 'red' }}>
-            <SquareGameColor
-              onEasyMode={() => starGame('easy')}
-              onMediumMode={() => starGame('medium')}
-              onHardMode={() => starGame('hard')}
-              color={correctColor}
-              progress={progress(time)}
-            />
-          </div>
+
+          <ScoreBoard
+            score={score}
+            highScore={highScore}
+            time={time}
+            onReset={stopGame}
+            disabled={!isStart}
+          />
+
+          <SquareGameColor
+            onEasyMode={() => starGame('easy')}
+            onMediumMode={() => starGame('medium')}
+            onHardMode={() => starGame('hard')}
+            color={correctColor}
+            progress={progress(time)}
+          />
+
           {isStart && (
-            <div style={{ paddingBlock: 15 }}>
-              <ButtonGroup.Root>
-                {colors.map((color, index) => (
-                  <ButtonGroup.Item
-                    key={color}
-                    onClick={() =>
-                      handleColorSelectedOption(color, correctColor)
-                    }
-                    blr={index > 0 && index < colors.length - 1}
-                  >
-                    {color}
-                  </ButtonGroup.Item>
-                ))}
-              </ButtonGroup.Root>
-            </div>
+            <ButtonGroup.Root>
+              {colors.map((color, index) => (
+                <ButtonGroup.Item
+                  key={color}
+                  onClick={() => handleColorSelectedOption(color, correctColor)}
+                  blr={index > 0 && index < colors.length - 1}
+                >
+                  {color}
+                </ButtonGroup.Item>
+              ))}
+            </ButtonGroup.Root>
           )}
-        </div>
+        </Div>
       </MainContent>
-      <div
-        style={{
-          bottom: 10,
-          right: 10,
-          position: 'absolute'
-        }}
-      >
+
+      <ContainerReset>
         <Button onClick={() => handleResetAll()} variant="text">
           Reset All
         </Button>
-      </div>
+      </ContainerReset>
 
       <Modal
         open={modalOpen}
