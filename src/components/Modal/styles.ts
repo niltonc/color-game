@@ -48,3 +48,17 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
 `;
+export const CloseContainer = styled.div`
+  position: absolute;
+  right: 10px;
+  top: 20px;
+`;
+export const BodyContainer = styled.div`
+  gap: 12px;
+  display: flex;
+  flex-direction: column;
+`;
+export const ButtonContainer = styled.div`
+  display: flex;
+  gap: 10px;
+`;

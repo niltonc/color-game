@@ -11,7 +11,9 @@ export const SidebarContainer = styled.div`
 export const ScoreContainer = styled.div`
   padding: 5px;
   display: flex;
-  margin-top: 10px;
+  flex: 1;
+  gap: 10px;
+  justify-content: space-between;
   align-items: center;
   padding-inline: 20px;
   border-block: 2px solid ${theme.colors.border};

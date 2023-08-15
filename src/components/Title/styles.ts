@@ -16,21 +16,21 @@ const TitleWord = styled.div`
 `;
 
 export const TitleWord1 = styled(TitleWord)`
-  --color-1: #186cb8;
-  --color-2: #2a9a9f;
-  --color-3: #f1b211;
+  --color-1: ${theme.colors.color_1};
+  --color-2: ${theme.colors.color_2};
+  --color-3: ${theme.colors.color_3};
 `;
 
 export const TitleWord2 = styled(TitleWord)`
-  --color-1: #e83611;
-  --color-2: #accfcb;
-  --color-3: #186cb8;
+  --color-1: ${theme.colors.color_4};
+  --color-2: ${theme.colors.color_5};
+  --color-3: ${theme.colors.color_6};
 `;
 
 export const TitleWord3 = styled(TitleWord)`
-  --color-1: #2a9a9f;
-  --color-2: #f9002f;
-  --color-3: #accfcb;
+  --color-1: ${theme.colors.color_7};
+  --color-2: ${theme.colors.color_8};
+  --color-3: ${theme.colors.color_9};
 `;
 
 export const Title = styled.div`

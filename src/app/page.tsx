@@ -177,6 +177,7 @@ export default function Home() {
               highScore={highScore}
               time={time}
               onReset={stopGame}
+              disabled={!isStart}
             />
           </div>
           <div style={{ width: 450, background: 'red' }}>

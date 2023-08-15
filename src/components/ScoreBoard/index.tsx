@@ -5,38 +5,38 @@ import {
   ScoreWrapper,
   Button,
   Title,
-  Text
+  Text,
+  ButtonContainer
 } from './styles';
 
 const ScoreBoard: React.FC<ScoreBoardProps> = ({
   score = 0,
   highScore = 0,
   time = 0,
-  onReset
+  onReset,
+  disabled = false
 }) => {
   return (
     <ScoreWrapper>
-      <ScoreColumn style={{ gap: 5 }}>
-        <Title>
-          REMANING <br />
-          TIME (s)
-        </Title>
+      <ScoreColumn gap>
+        <Title>REMANING TIME (s)</Title>
         <Text>{time}s</Text>
       </ScoreColumn>
-      <div>
-        <Button onClick={onReset}>RESTART</Button>
-      </div>
+
+      <ButtonContainer>
+        <Button onClick={onReset} disabled={disabled}>
+          RESTART
+        </Button>
+      </ButtonContainer>
+
       <ScoreColumn>
         <ScoreItem>
-          <Title style={{ marginLeft: 20 }}>
-            HIGH <br />
-            SCORE
-          </Title>
-          <Text style={{ marginRight: 20 }}>{highScore}</Text>
+          <Title>HIGH SCORE</Title>
+          <Text>{highScore}</Text>
         </ScoreItem>
         <ScoreItem binline>
-          <Title style={{ marginLeft: 20 }}>SCORE</Title>
-          <Text style={{ marginRight: 20 }}>{score}</Text>
+          <Title>SCORE</Title>
+          <Text>{score}</Text>
         </ScoreItem>
       </ScoreColumn>
     </ScoreWrapper>

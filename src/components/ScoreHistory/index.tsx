@@ -5,7 +5,8 @@ import {
   Container,
   Duration,
   ErrorCircular,
-  Rectangle
+  Rectangle,
+  RectangleContainer
 } from './styles';
 
 const ScoreHistory: React.FC<ScoreHistoryProps> = ({
@@ -28,14 +29,15 @@ const ScoreHistory: React.FC<ScoreHistoryProps> = ({
       )}
       {type === 'error' && (
         <ColorResultContainer>
-          <div style={{ display: 'flex', flex: 1, gap: 8 }}>
+          <RectangleContainer>
             <Rectangle variant="light" color="#90caf9">
               {errorLabel}
             </Rectangle>
             <Rectangle variant="dark" color="#0288d1">
               {successLabel}
             </Rectangle>
-          </div>
+          </RectangleContainer>
+
           <Container>
             <ErrorCircular />
             <Duration>{time}s</Duration>

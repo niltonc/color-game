@@ -77,5 +77,9 @@ export const ButtonWrapper = styled.button<ButtonStyleProps>`
     css`
       height: 0px;
       padding: 0px;
+      &:focus {
+        box-shadow: 0 0 0 2px ${theme.colors.focus};
+        outline: 0;
+      }
     `}
 `;

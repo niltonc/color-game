@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScoreContainer, TabContainer, Title } from './styles';
+import { Div, ScoreContainer, TabContainer, Text, Title } from './styles';
 import Button from '@/components/Button';
 import Image from 'next/image';
 import Right from '@/assets/Expand_right.svg';
@@ -21,16 +21,8 @@ const ScoresTab = ({ onClick }: HistoryTab) => {
         </Button>
       </TabContainer>
       <ScoreContainer>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-around',
-            gap: 20
-          }}
-        >
-          <div style={{ width: 100 }}>Name</div>
-          <div>Score</div>
-        </div>
+        <Text>Name</Text>
+        <Text>Score</Text>
       </ScoreContainer>
     </>
   );

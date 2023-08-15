@@ -3,7 +3,15 @@ import React, { useState } from 'react';
 import Button from '@/components/Button';
 import TextField from '@/components/TextField';
 import CloseIcon from '@/assets/Close_round.svg';
-import { Container, ModalContent, ModalOverlay, Span } from './styles';
+import {
+  BodyContainer,
+  ButtonContainer,
+  CloseContainer,
+  Container,
+  ModalContent,
+  ModalOverlay,
+  Span
+} from './styles';
 import { usePersistedPlayerData } from '@/store/usePersistedPlayerScore';
 
 const Modal: React.FC<ModalProps> = ({ open, onClose, score }) => {
@@ -26,19 +34,13 @@ const Modal: React.FC<ModalProps> = ({ open, onClose, score }) => {
   return (
     <ModalOverlay>
       <ModalContent>
-        <div
-          style={{
-            position: 'absolute',
-            right: 10,
-            top: 20
-          }}
-        >
+        <CloseContainer>
           <Button onClick={onClose} variant="link">
             <Image src={CloseIcon} width={20} height={20} alt="Close" />
           </Button>
-        </div>
+        </CloseContainer>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <BodyContainer>
           <Container>
             <Span size={20}>Your score was:</Span>
             <Span size={55} color="#77d353" bold>
@@ -53,14 +55,13 @@ const Modal: React.FC<ModalProps> = ({ open, onClose, score }) => {
             value={playerName}
             onChange={(e) => setPlayerName(e.target.value)}
           />
-
-          <div style={{ display: 'flex', gap: 10 }}>
+          <ButtonContainer>
             <Button onClick={onClose} variant="outline">
               Cancel
             </Button>
             <Button onClick={handleSaveClick}>Save</Button>
-          </div>
-        </div>
+          </ButtonContainer>
+        </BodyContainer>
       </ModalContent>
     </ModalOverlay>
   );

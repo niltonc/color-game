@@ -37,6 +37,7 @@ interface ScoreBoardProps {
   highScore?: number;
   time?: number;
   onReset?: () => void;
+  disabled?: boolean;
 }
 interface ChildrenProp {
   children?: React.ReactNode;
@@ -91,3 +92,6 @@ type PlayerScore = {
   playerName: string;
   score: number;
 };
+interface ScoreStyleProps {
+  gap?: boolean;
+}

@@ -92,3 +92,8 @@ export const Container = styled.div`
   padding-left: 8px;
   justify-content: flex-start;
 `;
+export const RectangleContainer = styled.div`
+  gap: 8px;
+  flex: 1;
+  display: flex;
+`;

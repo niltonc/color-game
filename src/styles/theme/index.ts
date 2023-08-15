@@ -44,7 +44,16 @@ export default {
     hover: '#f0f0f0',
     focus: '#1c77cf',
     error: '#ff9494',
-    success: '#77d353'
+    success: '#77d353',
+    color_1: '#186cb8',
+    color_2: '#2a9a9f',
+    color_3: '#f1b211',
+    color_4: '#e83611',
+    color_5: '#accfcb',
+    color_6: '#186cb8',
+    color_7: '#2a9a9f',
+    color_8: '#f9002f',
+    color_9: '#accfcb'
   },
   spacings: {
     xxxsmall: '0.8rem',

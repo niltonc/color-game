@@ -9,13 +9,18 @@ export const ScoreWrapper = styled.div`
   background-color: ${theme.colors.gray_50};
   box-shadow: ${theme.box.shadow};
 `;
-export const ScoreColumn = styled.div`
+export const ScoreColumn = styled.div<ScoreStyleProps>`
   width: 100%;
   height: 80px;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  ${(props) =>
+    props.gap &&
+    css`
+      gap: 10px;
+    `}
 `;
 export const ScoreItem = styled.div<ScoreBoardStyleProps>`
   flex: 1;
@@ -23,6 +28,7 @@ export const ScoreItem = styled.div<ScoreBoardStyleProps>`
   display: flex;
   padding-block: 2px;
   align-items: center;
+  padding-inline: 20px;
   justify-content: space-between;
   ${(props) =>
     props.binline &&
@@ -30,7 +36,8 @@ export const ScoreItem = styled.div<ScoreBoardStyleProps>`
       border-top: 2px solid ${theme.colors.border};
     `}
 `;
-export const Button = styled.button`
+export const ButtonContainer = styled.div``;
+export const Button = styled.button<ScoreStyleProps>`
   height: 100%;
   border: none;
   font-size: ${theme.font.sizes.xxxxsmall};
@@ -45,6 +52,16 @@ export const Button = styled.button`
   }
   &:active {
     transform: translate3d(0, 0.3px, 0);
+  }
+  &:disabled {
+    cursor: not-allowed;
+    &:hover {
+      background-color: ${theme.colors.gray_200};
+      color: ${theme.colors.gray_400};
+    }
+    &:active {
+      transform: translate3d(0, 0px, 0);
+    }
   }
 `;
 export const Title = styled.span`
