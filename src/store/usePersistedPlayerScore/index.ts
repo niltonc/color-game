@@ -30,13 +30,6 @@ export { usePlayerStore };
 const usePersistedPlayerData = () => {
   const { playerScores, setPlayerScores, clearPlayerScores } = usePlayerStore();
 
-  // useEffect(() => {
-  //   const initialStoredPlayerScores = window.localStorage.getItem('playerScores');
-  //   if (initialStoredPlayerScores !== null) {
-  //     setPlayerScores(JSON.parse(initialStoredPlayerScores));
-  //   }
-  // }, [setPlayerScores]);
-
   useEffect(() => {
     window.localStorage.setItem('playerScores', JSON.stringify(playerScores));
   }, [playerScores]);

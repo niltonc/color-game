@@ -8,7 +8,7 @@ import ScoreHistory from '@/components/ScoreHistory';
 import { ButtonGroup } from '@/components/ButtonGroup';
 import ScrollSection from '@/components/ScrollSection';
 import SquareGameColor from '@/components/SquareGameColor';
-import Modal from '@/helper/Modal';
+import Modal from '@/components/Modal';
 import { useGlobalStore } from '@/store/useGlobalStore';
 import { usePersistedHighScore } from '@/store/usePersistedHighScore';
 import { usePersistedPlayerData } from '@/store/usePersistedPlayerScore';
