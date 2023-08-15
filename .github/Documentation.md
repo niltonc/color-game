@@ -2,27 +2,27 @@
 
 ![image](./initialscreen.png)
 
-### Porque das tecnologias?
+### Choice of Technologies
 
 💅 **Styled Components:**
 
-Styled Components é uma biblioteca feita para React e React Native. Ela utiliza uma mistura de CSS e Javascript usando uma técnica chamada CSS-in-JS.
+Styled Components is a library designed for React and React Native. It uses a blend of CSS and JavaScript through a technique called CSS-in-JS.
 
 - Global Stylesheet
-- Adaptação baseada em props
-- Extensão de estilos
-- Temas
+- Prop-based Adaptation
+- Style Extension
+- Theming
 
 🚥 **Zustand:**
 
-Zustand é uma solução de gestão de estados pequenos, rápida e escalonável. Sua gestão de estado é centralizada e baseada em ações.
+Zustand is a small, fast, and scalable state management solution. Its state management is centralized and action-based.
 
-- Código menos repetição (comparado com Redux).
-- Flexibilidade
-- Não envolve a aplicação em um provedor, como normalmente é feito no Redux.
-- Re-renderiza os componentes apenas quando houver mudanças.
+- Less repetitive code compared to Redux.
+- Flexibility
+- Doesn't require wrapping the application in a provider, as is typically done in Redux.
+- Re-renders components only when changes occur.
 
-### Aplicação
+### Application
 
 #### EASY MODE
 
@@ -44,4 +44,4 @@ Zustand é uma solução de gestão de estados pequenos, rápida e escalonável.
 
 ![image](./playerscore.png)
 
-- A lista se organiza pela pontuação
+- The list is organized by score.

@@ -2,28 +2,28 @@
 
 ![image](./.github/initial.gif)
 
-### Como o jogo funciona?
+### How does the game work?
 
-O jogo consiste em acertar o máximo possível de cores em 30s. Quando o jogo inicia, uma cor aleatória irá aparecer e para ela deverão aparecer 3 opções de resposta (obrigatoriamente em hexadecimal). Sendo duas incorretas (geradas aleatoriamente), e uma correta.
-A cada rodada, uma nova cor aparece, e o jogador terá 10s para responder e resultar em ganho ou perda de pontuação:
+The game consists of trying to match as many colors as possible within 30 seconds. When the game starts, a random color will appear, and 3 answer options must appear for it (mandatory in hexadecimal). Two of these options will be incorrect (randomly generated), and one will be correct.
 
-- Se o jogador não responder a tempo, ele perde 2 pontos.
-- Se o jogador responder a tempo, mas errado, perderá 1 ponto.
-- Se o jogador responder a tempo e corretamente, ganhará 5 pontos.
+Each round, a new color will appear, and the player will have 10 seconds to respond, resulting in either a gain or loss of points:
 
-O jogo conta também com o máximo de pontuação que já foi feita em uma partida (representado no protótipo por `HIGH SCORE`).
-E a pontuação da partida atual (representada no protótipo por `SCORE`).
-Existirá também à esquerda, um histórico das cores referentes a partida atual, que dirá de forma visual quais o jogador acertou, quais errou, e em quanto tempo foram respondidas. A cada vez que uma partida é iniciada, essa pilha é resetada. (representada no protótipo por `CURRENT/LATEST GAME`).
+- If the player doesn't respond in time, they lose 2 points.
+- If the player responds in time but incorrectly, they lose 1 point.
+- If the player responds in time and correctly, they earn 5 points.
+- The game also keeps track of the highest score achieved in a game session (represented in the prototype as HIGH SCORE), as well as the current game's score (represented in the prototype as SCORE).
 
-### Funcionalidades
+On the left, there is a history of colors from the current game, which visually shows the colors the player guessed correctly, the ones they guessed incorrectly, and how quickly they were answered. Each time a game session is started, this stack is reset (represented in the prototype as CURRENT/LATEST GAME).
 
-- O jogo só deve começar quando o jogador decidir (representado no protótipo por `START`)
-- Caso o jogador atualize, ou feche a página:
-  - `HIGH SCORE` deverá persistir.
-  - Se um jogo estiver em andamento, ignorar e jogar fora seus dados. Voltando ao estado inicial com o botão `START`
-  - Pilha referente a última partida concluída deverá persistir
-- Se o jogador quiser, ele poderá reiniciar a partida a qualquer momento (representado no protótipo por `RESTART`)
-- Se o jogador quiser, ele poderá limpar todos os dados já salvos pelo jogo. (representado no protótipo por `RESET ALL DATA`)
+### Features
+
+- The game should only start when the player decides (represented in the prototype as START).
+- If the player refreshes or closes the page:
+  HIGH SCORE should persist.
+- If a game is in progress, its data should be ignored and discarded. The game should return to the initial state with the START button.
+- The stack related to the last completed game should persist.
+- If the player wants, they can restart the game at any time (represented in the prototype as RESTART).
+- If the player wants, they can clear all data saved by the game (represented in the prototype as RESET ALL DATA).
 
 A TypeScript starter for Next.js that includes all you need to build amazing projects 🔥
 
